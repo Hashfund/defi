@@ -21,7 +21,7 @@ export default function LayoutNavigation({ className }: LayoutNavigationProps) {
           : "lt-md:hidden",
       ])}
     >
-      <div className="flex-1 flex flex-col bg-black/50 lt-md:backdrop-blur-3xl lt-md:animate-slide-in-down lt-md:animate-duration-250">
+      <div className="flex flex-1 flex-col bg-black/50 lt-md:animate-slide-in-down lt-md:animate-duration-250 lt-md:backdrop-blur-3xl">
         <div className="flex">
           <div className="flex-1">
             <IcLogo
@@ -40,8 +40,9 @@ export default function LayoutNavigation({ className }: LayoutNavigationProps) {
         <div className="md:flex md:flex-col">
           {layoutNavigations.map((navigation, index) => (
             <Link
+              key={index}
               href={navigation.href}
-              className="flex space-x-2 items-center p-4 hover:text-white/60"
+              className="flex items-center p-4 space-x-2 hover:text-white/60"
             >
               <navigation.icon className="text-xl" />
               <p>{navigation.name}</p>

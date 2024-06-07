@@ -9,7 +9,7 @@ export default function LayoutHeaderClient() {
 
   return (
     <>
-      <div className="flex space-x-4 items-center">
+      <div className="flex items-center space-x-4">
         <button className="btn btn-primary">Connect Wallet</button>
         <button
           className="px-2 py-4 md:hidden"

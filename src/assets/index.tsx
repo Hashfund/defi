@@ -5,6 +5,7 @@ export function IcLogo(props: Omit<React.ComponentProps<typeof Image>, "src">) {
   return (
     <Image 
       {...props} 
+      alt={props.alt}
       src={IcLogoAsset} />
   );
 }
