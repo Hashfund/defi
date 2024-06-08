@@ -4,5 +4,17 @@
 @unocss;
 
 .btn {
-  @apply bg-amber text-black px-4 py-2 rounded-md;
+  @apply text-black px-4 py-2 rounded;
+}
+
+.btn-primary {
+  @apply bg-gradient-to-r from-amber to-green;
+}
+
+.btn-primary:hover, .btn-primary:active {
+  @apply from-amber/80 to-green/80;
+}
+
+.input-with-icon:focus-within svg {
+  @apply text-amber;
 }

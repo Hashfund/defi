@@ -9,8 +9,11 @@ export default function LayoutHeaderClient() {
 
   return (
     <>
-      <div className="flex items-center space-x-4">
-        <button className="btn btn-primary">Connect Wallet</button>
+      <div className="flex items-center space-x-2">
+        <button className="btn btn-primary truncate">
+          Connect
+          <span className="lt-md:hidden"> Wallet</span>
+        </button>
         <button
           className="px-2 py-4 md:hidden"
           onClick={() => setVisible(!visible)}

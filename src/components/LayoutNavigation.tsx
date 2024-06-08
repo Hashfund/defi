@@ -1,16 +1,20 @@
 "use client";
 import clsx from "clsx";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 import { MdClose } from "react-icons/md";
+
+import { IcLogo } from "@/assets";
 import useNavigation from "@/composables/useNavigation";
 import { layoutNavigations } from "@/config/navigation";
-import { IcLogo } from "@/assets";
-import Link from "next/link";
 
 type LayoutNavigationProps = {
   className?: string;
 };
 
 export default function LayoutNavigation({ className }: LayoutNavigationProps) {
+  const pathname = usePathname();
   const { visible, setVisible } = useNavigation();
 
   return (
@@ -21,7 +25,7 @@ export default function LayoutNavigation({ className }: LayoutNavigationProps) {
           : "lt-md:hidden",
       ])}
     >
-      <div className="flex flex-1 flex-col bg-black/50 lt-md:animate-slide-in-down lt-md:animate-duration-250 lt-md:backdrop-blur-3xl">
+      <div className="flex flex-1 flex-col bg-black/50 backdrop-blur-3xl lt-md:animate-slide-in-down lt-md:animate-duration-250 md:bg-black/20">
         <div className="flex">
           <div className="flex-1">
             <IcLogo
@@ -38,16 +42,24 @@ export default function LayoutNavigation({ className }: LayoutNavigationProps) {
           </button>
         </div>
         <div className="md:flex md:flex-col">
-          {layoutNavigations.map((navigation, index) => (
-            <Link
-              key={index}
-              href={navigation.href}
-              className="flex items-center p-4 space-x-2 hover:text-white/60"
-            >
-              <navigation.icon className="text-xl" />
-              <p>{navigation.name}</p>
-            </Link>
-          ))}
+          {layoutNavigations.map((navigation, index) => {
+            const isActive = pathname === navigation.href;
+
+            return (
+              <Link
+                key={index}
+                href={navigation.href}
+                className={clsx(
+                  "flex items-center p-4 space-x-4 hover:text-white/60",
+                  [isActive ? "text-amber" : "text-white"]
+                )}
+                onClick={() => setVisible(false)}
+              >
+                <navigation.icon className="text-xl" />
+                <p>{navigation.name}</p>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </nav>
