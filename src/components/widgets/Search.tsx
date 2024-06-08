@@ -15,7 +15,7 @@ export default function Search({ className }: SearchProps) {
     >
       <MdSearch className="text-xl text-amber-50/50" />
       <input
-        className="p-2 bg-transparent outline-none placeholder-amber-50/50 lt-md:max-w-48"
+        className="bg-transparent p-2 outline-none lt-md:max-w-48 placeholder-amber-50/50"
         placeholder="Search for token"
       />
     </div>

@@ -36,9 +36,9 @@ export default function RootLayout({
         )}
       >
         <Provider>
-          <div className="flex flex-1 bg-gradient-to-b from-amber/20 via-green/10 to-black">
+          <div className="flex flex-1 from-amber/20 via-green/10 to-black bg-gradient-to-b">
             <LayoutNavigation className="md:w-1/4 xl:w-1/5" />
-            <div className="flex-1 flex flex-col">
+            <div className="flex flex-1 flex-col">
               <LayoutHeader />
               {children}
               <LayoutFooter />

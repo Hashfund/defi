@@ -6,8 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "asset": "bun run scripts/asset.ts"
+    "lint": "next lint --fix",
+    "asset": "bun run scripts/asset.ts",
+    "prepare": "husky"
   },
   "dependencies": {
     "@headlessui/react": "^2.0.4",
@@ -29,6 +30,7 @@
     "@unocss/postcss": "^0.60.4",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
+    "husky": "^9.0.11",
     "postcss": "^8",
     "typescript": "^5",
     "unocss": "^0.60.4"

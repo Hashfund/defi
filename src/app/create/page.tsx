@@ -4,7 +4,7 @@ import Input from "@/components/widgets/Input";
 
 export default function CreatePage() {
   return (
-    <main className="flex flex-col lt-md:px-4 md:self-center">
+    <main className="flex flex-col md:self-center lt-md:px-4">
       <Formik
         initialValues={{
           name: "",
