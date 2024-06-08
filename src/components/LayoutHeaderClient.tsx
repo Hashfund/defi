@@ -3,9 +3,11 @@
 import { MdMenu } from "react-icons/md";
 
 import useNavigation from "@/composables/useNavigation";
+import useThemeColor from "@/composables/useThemeColor";
 
 export default function LayoutHeaderClient() {
   const { visible, setVisible } = useNavigation();
+  useThemeColor(visible);
 
   return (
     <>

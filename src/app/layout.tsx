@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import "@unocss/reset/tailwind.css";
 
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 
 import "@/globals.css";
@@ -20,6 +20,10 @@ export const metadata: Metadata = {
   openGraph: {
     images: [],
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#261c01",
 };
 
 export default function RootLayout({
