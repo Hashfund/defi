@@ -12,7 +12,7 @@ export default function Input({ label, ...props }: InputProps) {
         <div className="border-1 border-amber-50/50 rounded from-black/10 bg-gradient-to-r focus-within:border-amber focus-within:ring-2 focus-within:ring-offset-3 focus-within:ring-amber/50 focus-within:ring-offset-transparent">
           <Field
             {...props}
-            className="bg-transparent p-2 outline-none  placeholder-text-sm placeholder-amber-50/50 md:min-w-lg"
+            className="bg-transparent p-2 outline-none md:min-w-lg placeholder-text-sm placeholder-amber-50/50"
           />
         </div>
       </div>
