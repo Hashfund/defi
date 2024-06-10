@@ -1,7 +1,31 @@
+"use client";
+import { useState } from "react";
+
+import TokenList from "@/components/TokenList";
+import { timeFilters } from "@/composables/useTimeFilter";
+import TimeFilterInput from "@/components/widgets/TimeFilterInput";
+
 export default function HomePage() {
+  const [intervalFilter, setIntervalFilter] = useState<
+    (typeof timeFilters)[number] | undefined
+  >();
+
   return (
-    <main>
-      <div></div>
+    <main className="flex flex-col">
+      <div className="flex flex-col space-y-4">
+        <div className="flex items-center px-4 space-x-2">
+          <div className="flex-1">
+            <h1 className="text-nowrap text-xl font-bold md:text-2xl">
+              Recent Mint
+            </h1>
+          </div>
+          <TimeFilterInput
+            value={intervalFilter}
+            setValue={setIntervalFilter}
+          />
+        </div>
+        <TokenList />
+      </div>
     </main>
   );
 }

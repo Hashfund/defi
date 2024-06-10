@@ -2,7 +2,7 @@ import clsx from "clsx";
 import "@unocss/reset/tailwind.css";
 
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Noto_Sans  } from "next/font/google";
 
 import "@/globals.css";
 import Provider from "@/providers";
@@ -10,7 +10,10 @@ import LayoutHeader from "@/components/LayoutHeader";
 import LayoutFooter from "@/components/LayoutFooter";
 import LayoutNavigation from "@/components/LayoutNavigation";
 
-const inter = Inter({ subsets: ["latin"] });
+const font = Noto_Sans({
+  subsets: ["latin"],
+  weight: ["300","400", "500", "700", "900"],
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://hashfund.fun"),
@@ -35,14 +38,14 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={clsx(
-          inter.className,
+          font.className,
           "fixed inset-0 flex flex-col bg-black text-white"
         )}
       >
         <Provider>
           <div className="flex flex-1 from-amber/20 via-green/10 to-black bg-gradient-to-b">
             <LayoutNavigation className="md:w-1/4 xl:w-1/5" />
-            <div className="flex flex-1 flex-col">
+            <div className="flex flex-1 flex-col space-y-4">
               <LayoutHeader />
               {children}
               <LayoutFooter />

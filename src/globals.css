@@ -11,10 +11,39 @@
   @apply bg-gradient-to-r from-amber to-green;
 }
 
-.btn-primary:hover, .btn-primary:active {
+.btn-primary:hover,
+.btn-primary:active {
   @apply from-amber/80 to-green/80;
 }
 
 .input-with-icon:focus-within svg {
   @apply text-amber;
+}
+
+table {
+  @apply text-left border-collapse border-spacing-0;
+}
+
+table thead th {
+  @apply font-light text-white/80 bg-black/20 py-4 text-nowrap cursor-pointer;
+}
+
+.dollar::before {
+  content: "$";
+  font-family: monospace;
+}
+
+th,
+td {
+  @apply p-2  whitespace-nowrap;
+}
+
+.overflow-x-scroll {
+  scrollbar-width: 0px;
+}
+
+.overflow-x-scroll::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
 }

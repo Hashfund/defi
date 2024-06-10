@@ -19,7 +19,7 @@ export default function LayoutNavigation({ className }: LayoutNavigationProps) {
 
   return (
     <nav
-      className={clsx(className, "md:flex md:flex-col", [
+      className={clsx(className, "backdrop-blur-sm z-10 md:flex md:flex-col", [
         visible
           ? "lt-md:fixed lt-md:inset-0 lt-md:animate-fade-in lt-md:animate-duration-150 lt-md:bg-black/30"
           : "lt-md:hidden",

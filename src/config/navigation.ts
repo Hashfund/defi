@@ -1,7 +1,7 @@
 import { IconType } from "react-icons";
 import { FaQuestionCircle } from "react-icons/fa";
 import { FaTelegram, FaTwitter } from "react-icons/fa6";
-import { MdAddCircle, MdHome } from "react-icons/md";
+import { MdHome, MdStopCircle } from "react-icons/md";
 
 type Navigation = {
   name: string;
@@ -16,9 +16,9 @@ export const layoutNavigations: Navigation[] = [
     icon: MdHome,
   },
   {
-    name: "Create",
+    name: "Mint",
     href: "/create",
-    icon: MdAddCircle,
+    icon: MdStopCircle,
   },
   {
     name: "Twitter",
