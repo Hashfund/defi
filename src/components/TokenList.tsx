@@ -1,5 +1,6 @@
 import { tokens } from "@/config/dev/token";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function TokenList() {
   return (
@@ -18,7 +19,10 @@ export default function TokenList() {
         <tbody>
           {tokens.map((token, index) => (
             <>
-              <tr>
+              <Link
+                className="table-row"
+                href="/mint"
+              >
                 <td
                   scope="row"
                   className="pr-24"
@@ -54,7 +58,7 @@ export default function TokenList() {
                 <td className="text-sm">{token.totalSupply}</td>
                 <td className="dollar text-sm">{token.marketCap}</td>
                 <td className="text-sm">{token.holders}</td>
-              </tr>
+              </Link>
             </>
           ))}
         </tbody>
