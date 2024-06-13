@@ -35,7 +35,7 @@ export default function WalletConnectButton() {
             </div>
           </div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            {wallets.map((wallet, key) => (
+            {wallets.map((wallet, index) => (
               <div
                 key={index}
                 className="flex items-center border-1 border-transparent rounded bg-stone-700/50 p-3 space-x-4 hover:border-green hover:bg-green/20"

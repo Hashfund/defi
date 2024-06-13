@@ -24,7 +24,7 @@ table {
   @apply text-left border-collapse border-spacing-0;
 }
 
-table thead th {
+table th {
   @apply font-light text-white/80 bg-black/20 py-4 text-nowrap cursor-pointer;
 }
 
