@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import "@unocss/reset/tailwind.css";
+import "@solana/wallet-adapter-react-ui/styles.css"
 
 import type { Metadata, Viewport } from "next";
 import { Noto_Sans  } from "next/font/google";

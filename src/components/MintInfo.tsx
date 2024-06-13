@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { FaIntercom, FaTelegramPlane } from "react-icons/fa";
+import { MdWeb } from "react-icons/md";
+import { FaTelegramPlane } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa6";
 
 import MintInfoGrid from "./MintInfoGrid";
-import { MdWeb } from "react-icons/md";
 
 export default function MintInfo() {
   return (

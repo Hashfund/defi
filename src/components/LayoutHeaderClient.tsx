@@ -4,6 +4,7 @@ import { MdMenu } from "react-icons/md";
 
 import useNavigation from "@/composables/useNavigation";
 import useThemeColor from "@/composables/useThemeColor";
+import WalletConnectButton from "./widgets/WalletConnectButton";
 
 export default function LayoutHeaderClient() {
   const { visible, setVisible } = useNavigation();
@@ -12,10 +13,7 @@ export default function LayoutHeaderClient() {
   return (
     <>
       <div className="flex items-center space-x-2">
-        <button className="btn btn-primary truncate">
-          Connect
-          <span className="lt-md:hidden"> Wallet</span>
-        </button>
+       <WalletConnectButton />
         <button
           className="px-2 py-4 md:hidden"
           onClick={() => setVisible(!visible)}
