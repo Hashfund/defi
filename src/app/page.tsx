@@ -4,11 +4,14 @@ import { useState } from "react";
 import TokenList from "@/components/TokenList";
 import { timeFilters } from "@/composables/useTimeFilter";
 import TimeFilterInput from "@/components/widgets/TimeFilterInput";
+import { useMints } from "@/composables/useMints";
 
 export default function HomePage() {
   const [intervalFilter, setIntervalFilter] = useState<
     (typeof timeFilters)[number] | undefined
   >();
+
+  const { mints, next } = useMints();
 
   return (
     <main className="flex flex-col">
@@ -24,7 +27,7 @@ export default function HomePage() {
             setValue={setIntervalFilter}
           />
         </div>
-        <TokenList />
+        <TokenList mints={mints} />
       </div>
     </main>
   );

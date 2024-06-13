@@ -1,10 +1,18 @@
-import { Field } from "formik";
+import { ErrorMessage, Field, useFormik, useFormikContext } from "formik";
 
 type InputProps = {
   label: string;
 } & React.ComponentProps<typeof Field>;
 
 export default function Input({ label, ...props }: InputProps) {
+  const { setFieldValue } = useFormikContext();
+  if (props.type === "file")
+    props.onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const files = event.currentTarget.files;
+      if (files && files.length > 0)
+        setFieldValue(props.name, URL.createObjectURL(files[0]));
+    };
+
   return (
     <div className="flex flex-col md:min-w-lg space-y-2">
       <div className="flex flex-col space-y-1">
@@ -16,7 +24,9 @@ export default function Input({ label, ...props }: InputProps) {
           />
         </div>
       </div>
-      <small></small>
+      <small className="text-sm text-red first-letter:capitalize">
+        <ErrorMessage name={props.name} />
+      </small>
     </div>
   );
 }

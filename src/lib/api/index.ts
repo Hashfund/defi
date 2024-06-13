@@ -1,15 +1,19 @@
 import axios from "axios";
+import { MintApi } from "./mint.api";
 import { ImageKitApi } from "./imagekit.api";
+import { BASE_API_URL } from "@/config";
 
 export default class Api {
+  readonly mint: MintApi;
   readonly imagekit: ImageKitApi;
 
   constructor() {
     const axiosInstance = axios.create({
-      baseURL: "",
+      baseURL: BASE_API_URL,
     });
 
-    this.imagekit = new ImageKitApi(axios);
+    this.mint = new MintApi(axiosInstance);
+    this.imagekit = new ImageKitApi(axiosInstance);
   }
 
   private static _instance: Api;

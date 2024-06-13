@@ -1,9 +1,12 @@
-import clsx from "clsx";
 import "@unocss/reset/tailwind.css";
-import "@solana/wallet-adapter-react-ui/styles.css"
+import "@solana/wallet-adapter-react-ui/styles.css";
+import "react-toastify/dist/ReactToastify.css";
+
+import clsx from "clsx";
 
 import type { Metadata, Viewport } from "next";
-import { Noto_Sans  } from "next/font/google";
+import { Noto_Sans } from "next/font/google";
+import { ToastContainer } from "react-toastify";
 
 import "@/globals.css";
 import Provider from "@/providers";
@@ -13,7 +16,7 @@ import LayoutNavigation from "@/components/LayoutNavigation";
 
 const font = Noto_Sans({
   subsets: ["latin"],
-  weight: ["300","400", "500", "700", "900"],
+  weight: ["300", "400", "500", "700", "900"],
 });
 
 export const metadata: Metadata = {
@@ -44,15 +47,16 @@ export default function RootLayout({
         )}
       >
         <Provider>
-          <div className="flex flex-1 from-amber/20 via-green/10 to-black bg-gradient-to-b">
+          <div className="flex flex-1 overflow-y-scroll from-amber/20 via-green/10 to-black bg-gradient-to-b">
             <LayoutNavigation className="md:w-1/4 xl:w-1/5" />
-            <div className="flex flex-1 flex-col space-y-4">
+            <div className="flex flex-1 flex-col space-y-4 md:overflow-y-scroll">
               <LayoutHeader />
               {children}
               <LayoutFooter />
             </div>
           </div>
         </Provider>
+        <ToastContainer />
       </body>
     </html>
   );

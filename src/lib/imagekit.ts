@@ -15,12 +15,13 @@ export const uploadFile = async (
 ) => {
   const { data: authParams } =
     await Api.instance.imagekit.getAuthenticationParameters();
-  imagekit.upload({
+  return imagekit.upload({
     file,
     fileName,
     tags,
     token: authParams.token,
     signature: authParams.signature,
     expire: authParams.expire,
+    useUniqueFileName: false,
   });
 };

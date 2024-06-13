@@ -4,7 +4,7 @@ import { MdMenu } from "react-icons/md";
 
 import useNavigation from "@/composables/useNavigation";
 import useThemeColor from "@/composables/useThemeColor";
-import WalletConnectButton from "./widgets/WalletConnectButton";
+import WalletConnectButton from "./widgets/WalletConnect";
 
 export default function LayoutHeaderClient() {
   const { visible, setVisible } = useNavigation();
