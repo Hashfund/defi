@@ -6,10 +6,13 @@ import useSwaps from "@/composables/useSwaps";
 import { RouteProps } from "@/types";
 import MintMarket from "@/components/MintMarket";
 import BalanceProvider from "@/providers/BalanceProvider";
+import useGraph from "@/composables/useGraph";
+import MintActivity from "@/components/MintActivity";
 
 export default async function MintPage(props: RouteProps) {
   const mint = await useMint(props.params.mint);
   const swaps = await useSwaps(props.params.mint);
+  const graph = await useGraph(props.params.mint, "24h");
 
   return (
     <main className="flex flex-col px-4 space-y-8 md:px-8">
@@ -21,11 +24,8 @@ export default async function MintPage(props: RouteProps) {
               <Tab className="rounded px-6 py-2 text-green data-[selected]:bg-green data-[selected]:text-black">
                 Market
               </Tab>
-              <Tab className="px-6 py-2 text-green data-[selected]:bg-green data-[selected]:text-black">
+              <Tab className="rounded px-6 py-2 text-green data-[selected]:bg-green data-[selected]:text-black">
                 Activity
-              </Tab>
-              <Tab className="px-6 py-2 text-green data-[selected]:bg-green data-[selected]:text-black">
-                My Orders
               </Tab>
             </TabList>
             <TabPanels>
@@ -33,6 +33,7 @@ export default async function MintPage(props: RouteProps) {
                 swaps={swaps.results}
                 mint={mint}
               />
+              <MintActivity graph={graph} />
             </TabPanels>
           </TabGroup>
         </BalanceProvider>
