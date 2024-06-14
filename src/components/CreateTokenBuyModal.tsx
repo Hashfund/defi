@@ -4,8 +4,11 @@ import { MdClose } from "react-icons/md";
 import { toast } from "react-toastify";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 
+import { Explorer } from "@/web3/link";
 import { MintForm, processForm } from "@/form/MintForm";
+
 import PriceInput from "./widgets/PriceInput";
+import useBalance from "@/composables/useBalance";
 
 type CreateTokenBuyModalProps = {
   form: MintForm;
@@ -21,12 +24,14 @@ export default function CreateTokenBuyModal({
   const walletState = useWallet();
   const { connection } = useConnection();
 
+  const { solBalance } = useBalance();
+
   const [initialBuyAmount, setInitialBuyAmount] = useState(0);
   const processTx = async () => {
     const tx = await processForm(connection, walletState, form, {
       initialBuyAmount,
     });
-    window.open(`https://solscan.io/tx/${tx}?cluster=devnet`);
+    window.open(Explorer.buildTx(tx));
   };
 
   return (
@@ -54,6 +59,8 @@ export default function CreateTokenBuyModal({
         </div>
         <div className="flex-1">
           <PriceInput
+            ticker={"SOL"}
+            balance={solBalance}
             value={initialBuyAmount}
             onChange={setInitialBuyAmount}
           />

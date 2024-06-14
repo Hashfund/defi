@@ -57,7 +57,8 @@ export const processForm = async function (
     ticker: symbol,
     uri,
     initialBuyAmount: unsafeBN(
-      safeBN(initialBuyAmount).mul(new BN(10).pow(new BN(9)))
+      safeBN(initialBuyAmount, 9).mul(new BN(10).pow(new BN(9))),
+      9
     ),
     payer: publicKey!,
     connection,

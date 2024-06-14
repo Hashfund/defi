@@ -6,6 +6,6 @@ export abstract class Api {
   constructor(protected axios: AxiosInstance) {}
 
   protected buildPath(...args: any[]) {
-    return this.path + args.join("/");
+    return this.path + "/" + args.join("/");
   }
 }

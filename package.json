@@ -11,7 +11,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@hashfund/program": "^2.8.0",
+    "@hashfund/program": "^2.10.0",
     "@headlessui/react": "^2.0.4",
     "@solana/spl-token": "^0.4.6",
     "@solana/wallet-adapter-base": "^0.9.23",
@@ -24,11 +24,14 @@
     "autoprefixer": "^10.4.19",
     "axios": "^1.7.2",
     "bn.js": "^5.2.1",
+    "chart.js": "^4.4.3",
     "clsx": "^2.1.1",
     "formik": "^2.4.6",
     "imagekit-javascript": "^3.0.1",
+    "moment": "^2.30.1",
     "next": "14.2.3",
     "react": "^18",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18",
     "react-icons": "^5.2.1",
     "react-toastify": "^10.0.5",

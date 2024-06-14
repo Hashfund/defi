@@ -47,9 +47,9 @@ export default function RootLayout({
         )}
       >
         <Provider>
-          <div className="flex flex-1 overflow-y-scroll from-amber/20 via-green/10 to-black bg-gradient-to-b">
+          <div className="flex flex-1 overflow-x-hidden overflow-y-scroll from-amber/20 via-green/10 to-black bg-gradient-to-b">
             <LayoutNavigation className="md:w-1/4 xl:w-1/5" />
-            <div className="flex flex-1 flex-col space-y-4 md:overflow-y-scroll">
+            <div className="flex flex-1 flex-col overflow-x-hidden space-y-4 md:overflow-y-scroll">
               <LayoutHeader />
               {children}
               <LayoutFooter />

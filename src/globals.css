@@ -33,6 +33,11 @@ table th {
   font-family: monospace;
 }
 
+.sol::after {
+  content: " SOL";
+  font-family: monospace;
+}
+
 th,
 td {
   @apply p-2  whitespace-nowrap;

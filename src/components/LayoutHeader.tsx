@@ -1,4 +1,3 @@
-import { IcLogo } from "@/assets";
 import Search from "./widgets/Search";
 import LayoutHeaderClient from "./LayoutHeaderClient";
 

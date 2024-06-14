@@ -30,9 +30,8 @@ export default function CreatePage() {
             setForm(values);
           }}
         >
-          {({ errors, isSubmitting }) => (
+          {({isSubmitting }) => (
             <Form className="flex flex-col space-y-8">
-              {JSON.stringify(form)}
               <div className="flex flex-col space-y-2">
                 <Input
                   name="name"

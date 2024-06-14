@@ -16,6 +16,7 @@ export type Mint = {
     name: string;
     symbol: string;
     image: string;
+    description: string;
     external_url: string;
     properties: [
       files: [
@@ -26,6 +27,12 @@ export type Mint = {
       ]
     ];
   };
+  marketCap: string,
   totalSupply: string;
   boundingCurve?: BoundingCurve;
+  totalVolume: string;
+  last24HrVolume: string;
+  last24HrVolumeChange: string,
+  last24HrVolumeChangePercentage: string;
+  signature: string
 };

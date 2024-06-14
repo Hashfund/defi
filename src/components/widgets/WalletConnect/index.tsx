@@ -24,7 +24,7 @@ export default function WalletConnect() {
       >
         <Button className="btn btn-primary truncate outline-none">
           {publicKey ? (
-            truncateAddress(publicKey.toBase58())
+            truncateAddress(publicKey.toBase58(), 8)
           ) : (
             <>
               Connect
