@@ -40,7 +40,7 @@ export const createMintTokenTransaction = async function ({
       payer,
       data: {
         initialBuyAmount,
-        maximumMarkeyCap: new BN(2_000).mul(new BN(10).pow(new BN(9))),
+        maximumMarketCap: new BN(2_000).mul(new BN(10).pow(new BN(9))),
       },
     })),
     createSwapInInstruction({

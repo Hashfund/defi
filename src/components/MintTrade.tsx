@@ -34,7 +34,10 @@ export default function MintTrade({ mint }: MintTradeProps) {
           </TabList>
           <TabPanels className="flex flex-1 flex-col">
             <MintTradeBuyTab mint={mint.id} />
-            <MintTradeSellTab ticker={mint.ticker} />
+            <MintTradeSellTab
+              mint={mint.id}
+              ticker={mint.ticker}
+            />
           </TabPanels>
         </TabGroup>
       </PopoverPanel>
