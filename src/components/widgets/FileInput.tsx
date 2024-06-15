@@ -9,7 +9,7 @@ export default function FileInput({ label, ...props }: InputProps) {
   const { values, setFieldValue } = useFormikContext<{ [key: string]: File }>();
 
   return (
-    <div className="flex flex-col md:min-w-lg space-y-2">
+    <div className="flex flex-col space-y-2">
       <div className="flex flex-col space-y-1">
         <label className="text-sm text-amber-50/80">{label}</label>
         <div className="flex items-center border-1 border-amber-50/50 rounded from-black/10 bg-gradient-to-r pr-2 focus-within:border-amber focus-within:ring-2 focus-within:ring-offset-3 focus-within:ring-amber/50 focus-within:ring-offset-transparent">

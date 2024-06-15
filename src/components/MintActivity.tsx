@@ -9,7 +9,7 @@ type MintActivityProps = {
 
 export default function MintActivity({ graph }: MintActivityProps) {
   return (
-    <TabPanel className="flex-1 flex flex-col">
+    <TabPanel className="flex flex-1 flex-col">
       <TimeLineChart data={graph} />
     </TabPanel>
   );
