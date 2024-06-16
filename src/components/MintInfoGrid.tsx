@@ -7,7 +7,7 @@ type MintInfoGridProps = {
 
 export default function MintInfoGrid({ mint }: MintInfoGridProps) {
   return (
-    <div className="grid grid-cols-3 grid-rows-2 rounded-xl from-black/50 via-green/20 to-black/20 bg-gradient-to-r p-4 md:grid-cols-6 md:grid-rows-1 lt-md:gap-y-2 md:gap-x-4">
+    <div className="grid grid-cols-3 grid-rows-2 rounded-xl from-black/50 via-amber/20 to-black/20 bg-gradient-to-r p-4 md:grid-cols-6 md:grid-rows-1 lt-md:gap-y-2 md:gap-x-4">
       <div>
         <small className="text-white/80 font-medium">24H Change</small>
         <div className="flex items-center space-x-2">

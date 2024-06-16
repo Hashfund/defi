@@ -23,7 +23,7 @@ export default function StepButton({
     >
       {({ selected }) => (
         <>
-          <div className="flex space-x-4 items-center">
+          <div className="flex items-center space-x-4">
             <div>
               <div
                 className={clsx(

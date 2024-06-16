@@ -1,3 +1,4 @@
+"use client";
 import moment from "moment";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -5,6 +6,8 @@ import { useRouter } from "next/navigation";
 import { Mint } from "@/lib/api/models";
 import { normalizeBNString } from "@/web3/decimal";
 import { truncateAddress } from "@/web3/address";
+import Link from "next/link";
+import { Explorer } from "@/web3/link";
 
 type TokenListProps = {
   mints: Mint[];
@@ -19,6 +22,7 @@ export default function TokenList({ mints }: TokenListProps) {
         <thead>
           <tr>
             <th scope="col">Token</th>
+            <th scope="col">Creator</th>
             <th scope="col">Unit Price</th>
             <th scope="col">24h Volume</th>
             <th scope="col">Volume</th>
@@ -26,6 +30,7 @@ export default function TokenList({ mints }: TokenListProps) {
             <th scope="col">Market Cap</th>
             <th scope="col">Bounding Curve</th>
             <th scope="col">Transaction</th>
+            <th scope="col">Created At</th>
           </tr>
         </thead>
         <tbody>
@@ -49,6 +54,11 @@ export default function TokenList({ mints }: TokenListProps) {
                     <span>{mint.name}</span>
                   </div>
                 </div>
+              </td>
+              <td className="text-white/80">
+                <Link href={Explorer.buildAccount(mint.creator)}>
+                  {truncateAddress(mint.creator, 10)}
+                </Link>
               </td>
               <td>
                 <div>
@@ -80,10 +90,17 @@ export default function TokenList({ mints }: TokenListProps) {
               </td>
               <td className="sol">{normalizeBNString(mint.marketCap)}</td>
               <td className="text-white/80">
-                {truncateAddress(mint.boundingCurve!.id, 10)}
+                <Link
+                  href={Explorer.buildAccount(mint.boundingCurve.id)}
+                  target="_black"
+                >
+                  {truncateAddress(mint.boundingCurve!.id, 10)}
+                </Link>
               </td>
               <td className="text-white/80">
-                {truncateAddress(mint.signature, 10)}
+                <Link href={Explorer.buildTx(mint.signature)}>
+                  {truncateAddress(mint.signature, 10)}
+                </Link>
               </td>
               <td>{moment().format("MMMM Do YYYY h:mm a")}</td>
             </tr>

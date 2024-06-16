@@ -51,7 +51,7 @@ export default function LayoutNavigation({ className }: LayoutNavigationProps) {
                 href={navigation.href}
                 className={clsx(
                   "flex items-center p-4 space-x-4 hover:text-white/60",
-                  [isActive ? "text-green" : "text-white"]
+                  [isActive ? "text-amber" : "text-white"]
                 )}
                 onClick={() => setVisible(false)}
               >

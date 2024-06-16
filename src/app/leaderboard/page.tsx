@@ -1,17 +1,9 @@
-"use client";
-import { useState } from "react";
-
 import TokenList from "@/components/TokenList";
-import { timeFilters } from "@/composables/useTimeFilter";
-import TimeFilterInput from "@/components/widgets/TimeFilterInput";
 import { useMints } from "@/composables/useMints";
+import TimeFilterInput from "@/components/widgets/TimeFilterInput";
 
-export default function HomePage() {
-  const [intervalFilter, setIntervalFilter] = useState<
-    (typeof timeFilters)[number] | undefined
-  >();
-
-  const { mints, next } = useMints();
+export default async function LeaderboardPage() {
+  const { mints } = await useMints();
 
   return (
     <main className="flex flex-col">
@@ -22,10 +14,7 @@ export default function HomePage() {
               Leaderboard
             </h1>
           </div>
-          <TimeFilterInput
-            value={intervalFilter}
-            setValue={setIntervalFilter}
-          />
+          <TimeFilterInput />
         </div>
         <TokenList mints={mints} />
       </div>

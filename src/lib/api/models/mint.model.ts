@@ -29,7 +29,7 @@ export type Mint = {
   };
   marketCap: string,
   totalSupply: string;
-  boundingCurve?: BoundingCurve;
+  boundingCurve: BoundingCurve;
   totalVolume: string;
   last24HrVolume: string;
   last24HrVolumeChange: string,

@@ -9,13 +9,13 @@ export default function Search({ className }: SearchProps) {
   return (
     <div
       className={clsx(
-        "input-with-icon flex items-center bg-black/50 border-1 border-transparent px-2 rounded-md focus-within:ring-3 focus-within:ring-amber-300/50 focus-within:border-amber/50 lt-sm:max-w-[calc(100vw-12em)]",
+        "input-with-icon flex items-center bg-black/50 border-1 border-transparent px-2 rounded-md focus-within:ring-3 focus-within:ring-amber-300/50 focus-within:border-amber/50",
         className
       )}
     >
-      <MdSearch className="shrink-0 text-xl text-amber-50/50" />
+      <MdSearch className="text-amber-50/50 shrink-0 text-xl" />
       <input
-        className="flex-1 bg-transparent p-2 outline-none placeholder-amber-50/50"
+        className="placeholder-amber-50/50 flex-1 bg-transparent p-2 outline-none"
         placeholder="Search for token"
       />
     </div>

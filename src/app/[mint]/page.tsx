@@ -20,11 +20,11 @@ export default async function MintPage(props: RouteProps) {
         <BalanceProvider mint={mint.id}>
           <MintInfo mint={mint} />
           <TabGroup className="flex flex-col space-y-8">
-            <TabList className="self-start border border-green rounded p-1">
-              <Tab className="rounded px-6 py-2 text-green data-[selected]:bg-green data-[selected]:text-black">
+            <TabList className="self-start border border-amber rounded p-1">
+              <Tab className="rounded px-6 py-2 text-amber data-[selected]:bg-amber data-[selected]:text-black">
                 Market
               </Tab>
-              <Tab className="rounded px-6 py-2 text-green data-[selected]:bg-green data-[selected]:text-black">
+              <Tab className="rounded px-6 py-2 text-amber data-[selected]:bg-amber data-[selected]:text-black">
                 Activity
               </Tab>
             </TabList>

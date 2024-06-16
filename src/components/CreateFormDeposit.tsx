@@ -23,7 +23,7 @@ export default function CreateFormDeposit({
   const validationSchema = createInitialDepositSchema(balance);
 
   return (
-    <TabPanel className="flex-1 flex flex-col">
+    <TabPanel className="flex flex-1 flex-col">
       <div>
         <h1 className="text-xl font-bold">Provide Collateral</h1>
         <p className="text-sm text-gray-200">
@@ -38,7 +38,7 @@ export default function CreateFormDeposit({
         }}
       >
         {({ values, isSubmitting, setFieldValue }) => (
-          <Form className="flex-1 flex flex-col space-y-4">
+          <Form className="flex flex-1 flex-col space-y-4">
             <div className="flex-1">
               <PriceInput
                 ticker={ticker}

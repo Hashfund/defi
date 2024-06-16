@@ -16,7 +16,7 @@ type MintInfoProps = {
 };
 
 export default function MintInfo({ mint }: MintInfoProps) {
-  const {connected} = useWallet();
+  const { connected } = useWallet();
 
   return (
     <div className="flex flex-col space-y-4">
@@ -44,14 +44,16 @@ export default function MintInfo({ mint }: MintInfoProps) {
                   <FaTwitter />
                   <span className="text-sm">Twitter</span>
                 </button>
-                <Link
-                  href={mint.metadata.external_url}
-                  target="_blank"
-                  className="flex items-center rounded-full bg-stone-950/50 px-4 py-1 space-x-2"
-                >
-                  <MdWeb />
-                  <span className="text-sm">Website</span>
-                </Link>
+                {mint.metadata.external_url && (
+                  <Link
+                    href={mint.metadata.external_url}
+                    target="_blank"
+                    className="flex items-center rounded-full bg-stone-950/50 px-4 py-1 space-x-2"
+                  >
+                    <MdWeb />
+                    <span className="text-sm">Website</span>
+                  </Link>
+                )}
               </div>
             </div>
             <p className="line-clamp-3 text-sm text-white/80">

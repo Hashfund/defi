@@ -32,7 +32,7 @@ export default function PriceInput({
             onChange(Number(value));
           }}
         />
-        <div className="flex space-x-2 items-center">
+        <div className="flex items-center space-x-2">
           {icon && (
             <Image
               src={icon}
@@ -44,27 +44,12 @@ export default function PriceInput({
           )}
           <button
             type="button"
-            className="rounded-md bg-green/20 px-2 py-1 text-sm text-green"
+            className="rounded-md bg-amber/20 px-2 py-1 text-sm text-amber"
             onClick={() => onChange(balance)}
           >
             Max
           </button>
         </div>
-      </div>
-      <div className="flex items-center space-x-2">
-        {Array.from({ length: 4 }).map((_, index) => {
-          const per = 25 * (index + 1);
-          return (
-            <button
-              type="button"
-              key={index}
-              className="rounded bg-green-200 px-2 py-1 text-xs text-black hover:bg-white/80 after-font-mono after-content-['%']"
-              onClick={() => onChange(balance * (per / 100))}
-            >
-              {per}
-            </button>
-          );
-        })}
       </div>
     </div>
   );

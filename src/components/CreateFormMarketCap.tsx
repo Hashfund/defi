@@ -19,7 +19,7 @@ export default function CreateFormMarketCap({
   onSubmit,
 }: CreateFormMarketcapProps) {
   return (
-    <TabPanel className="flex-1 flex flex-col space-y-8">
+    <TabPanel className="flex flex-1 flex-col space-y-8">
       <div>
         <h1 className="text-xl">Bounding Curve Setting</h1>
         <p className="text-sm text-stone-300">
@@ -35,9 +35,9 @@ export default function CreateFormMarketCap({
         }}
       >
         {({ errors, values, isSubmitting, setFieldValue }) => (
-          <Form className="flex-1 flex flex-col space-y-8">
+          <Form className="flex flex-1 flex-col space-y-8">
             {JSON.stringify(errors)}
-            <div className="flex-1 flex flex-col space-y-2">
+            <div className="flex flex-1 flex-col space-y-2">
               <PriceInput
                 balance={0}
                 icon="/sol.png"
