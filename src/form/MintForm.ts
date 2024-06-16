@@ -7,14 +7,14 @@ import {
   WalletContextState,
 } from "@solana/wallet-adapter-react";
 
-import { mixed, object, string, InferType } from "yup";
+import { mixed, object, string, InferType, number } from "yup";
 
 import { findMintAddress } from "@/web3/address";
 import { createTokenRichMetadata } from "@/web3/asset";
 import { createMintTokenTransaction } from "@/web3/mint";
 import { Connection } from "@solana/web3.js";
 
-export const validationSchema = object().shape({
+export const validateMetadataSchema = object().shape({
   name: string().max(16).required(),
   symbol: string().max(10).required(),
   description: string().required().min(32),
@@ -24,19 +24,46 @@ export const validationSchema = object().shape({
   image: mixed().required("Image is required"),
 });
 
-export type MintForm = InferType<typeof validationSchema> & { image: File };
+export const validateMaximumMarketCapSchema = object().shape({
+  maximumMarketCap: number().moreThan(0, "Invalid amount").required(),
+});
 
-export type MintFormExtra = {
+export const createInitialDepositSchema = (balance: number) =>
+  object().shape({
+    amount: number()
+      .max(balance, "Insufficient Balance")
+      .moreThan(0, "At least decimal greater then 0"),
+  });
+
+export type MintMetadataForm = InferType<typeof validateMetadataSchema> & {
+  image: File;
+};
+
+export type MintMaximumMarketCapForm = {
+  maximumMarketCap: number;
+};
+
+export type MintInitialBuyAmountForm = {
   initialBuyAmount: number;
-  maximumMarketCap?: number;
 };
 
 export const processForm = async function (
   connection: Connection,
   { publicKey, sendTransaction }: WalletContextState,
-  { name, symbol, image, description, website, telegram, twitter }: MintForm,
-  { initialBuyAmount }: MintFormExtra
+  {
+    name,
+    symbol,
+    image,
+    description,
+    website,
+    telegram,
+    twitter,
+  }: MintMetadataForm,
+  { maximumMarketCap }: MintMaximumMarketCapForm,
+  { initialBuyAmount }: MintInitialBuyAmountForm
 ) {
+  console.log("initialBuy=", initialBuyAmount )
+  console.log("maximumMarketCap=", maximumMarketCap )
   const mint = findMintAddress(name, symbol, publicKey!);
 
   let uri = await createTokenRichMetadata(
@@ -56,6 +83,9 @@ export const processForm = async function (
     name,
     ticker: symbol,
     uri,
+    maximumMarketCap: unsafeBN(
+      safeBN(maximumMarketCap, 9).mul(new BN(10).pow(new BN(9)))
+    ),
     initialBuyAmount: unsafeBN(
       safeBN(initialBuyAmount, 9).mul(new BN(10).pow(new BN(9))),
       9

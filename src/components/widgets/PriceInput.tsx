@@ -1,9 +1,11 @@
 "use client";
+import Image from "next/image";
 
 type PriceInputProps = {
   ticker: string;
   balance: number;
-  value: number;
+  value?: number;
+  icon?: string;
   onChange: (value: number) => void;
 };
 
@@ -11,6 +13,7 @@ export default function PriceInput({
   balance,
   ticker,
   value,
+  icon,
   onChange,
 }: PriceInputProps) {
   return (
@@ -29,13 +32,24 @@ export default function PriceInput({
             onChange(Number(value));
           }}
         />
-        <button
-          type="button"
-          className="rounded-md bg-amber/20 px-2 py-1 text-sm text-amber"
-          onClick={() => onChange(balance)}
-        >
-          Max
-        </button>
+        <div className="flex space-x-2 items-center">
+          {icon && (
+            <Image
+              src={icon}
+              alt={ticker}
+              width={24}
+              height={24}
+              className="rounded-full"
+            />
+          )}
+          <button
+            type="button"
+            className="rounded-md bg-green/20 px-2 py-1 text-sm text-green"
+            onClick={() => onChange(balance)}
+          >
+            Max
+          </button>
+        </div>
       </div>
       <div className="flex items-center space-x-2">
         {Array.from({ length: 4 }).map((_, index) => {
@@ -44,7 +58,7 @@ export default function PriceInput({
             <button
               type="button"
               key={index}
-              className="rounded-md bg-white px-2 py-1 text-xs text-black hover:bg-white/80 after-font-mono after-content-['%']"
+              className="rounded bg-green-200 px-2 py-1 text-xs text-black hover:bg-white/80 after-font-mono after-content-['%']"
               onClick={() => onChange(balance * (per / 100))}
             >
               {per}

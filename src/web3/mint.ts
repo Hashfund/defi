@@ -10,6 +10,7 @@ type CreateMintTokenTransactionArgs = {
   name: string;
   ticker: string;
   uri: string;
+  maximumMarketCap?: BN;
   initialBuyAmount: BN;
   connection: Connection;
   payer: PublicKey;
@@ -19,6 +20,7 @@ export const createMintTokenTransaction = async function ({
   name,
   ticker,
   uri,
+  maximumMarketCap,
   initialBuyAmount,
   payer,
   connection,
@@ -40,7 +42,8 @@ export const createMintTokenTransaction = async function ({
       payer,
       data: {
         initialBuyAmount,
-        maximumMarketCap: new BN(2_000).mul(new BN(10).pow(new BN(9))),
+        maximumMarketCap:
+          maximumMarketCap ?? new BN(2_000).mul(new BN(10).pow(new BN(9))),
       },
     })),
     createSwapInInstruction({

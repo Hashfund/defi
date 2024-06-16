@@ -1,22 +1,69 @@
 "use client";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+
 import { useState } from "react";
-import { Form, Formik } from "formik";
-import { TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
+import { toast } from "react-toastify";
+import { TabGroup, TabList, TabPanels } from "@headlessui/react";
 
-import { MintForm, validationSchema } from "@/form/MintForm";
+import {
+  MintInitialBuyAmountForm,
+  MintMaximumMarketCapForm,
+  MintMetadataForm,
+  processForm,
+} from "@/form/MintForm";
 
-import Input from "@/components/widgets/Input";
-import FileInput from "@/components/widgets/FileInput";
-import CreateTokenBuyModal from "@/components/CreateTokenBuyModal";
+import { Explorer } from "@/web3/link";
 import StepButton from "@/components/widgets/StepButton";
 import CreateFormMetadata from "@/components/CreateFormMetadata";
+import CreateFormMarketCap from "@/components/CreateFormMarketCap";
+import CreateFormDeposit from "@/components/CreateFormDeposit";
+import BalanceProvider from "@/providers/BalanceProvider";
 
 export default function CreatePage() {
+  const walletState = useWallet();
+  const { connection } = useConnection();
+  const [tabIndex, setTabIndex] = useState(0);
+  const [formMetadata, setFormMetadata] = useState<MintMetadataForm>({
+    name: "",
+    symbol: "",
+    image: "" as unknown as File,
+    description: "",
+    website: "",
+    telegram: "",
+    twitter: "",
+  });
+  const [formMaxMarketCap, setFormMaxMarketCap] =
+    useState<MintMaximumMarketCapForm>({
+      maximumMarketCap: 0,
+    });
+  const [formInitialBuyAmount, setFormInitialBuyAmount] =
+    useState<MintInitialBuyAmountForm>({
+      initialBuyAmount: 0,
+    });
+
+  const processTx = async () => {
+    const tx = await processForm(
+      connection,
+      walletState,
+      formMetadata,
+      formMaxMarketCap,
+      formInitialBuyAmount
+    );
+    window.open(Explorer.buildTx(tx));
+  };
 
   return (
     <>
-      <TabGroup className="flex flex-1 flex-col lg:flex-row md:justify-center lt-md:px-4 md:px-8 lg:space-x-4 lt-md:space-y-8">
-        <TabList className="flex lg:w-sm lg:flex-col lg:justify-center lt-lg:space-x-4">
+      <TabGroup
+        selectedIndex={tabIndex}
+        onChange={(index) => {
+          if (index < tabIndex) {
+            setTabIndex(index);
+          }
+        }}
+        className="flex flex-1 flex-col lg:flex-row md:justify-center lt-md:px-4 md:px-8 lg:space-x-4 lt-lg:space-y-8"
+      >
+        <TabList className="flex lg:w-sm lg:flex-col lg:justify-center lt-lg:space-x-2">
           <StepButton
             position="1"
             title="Token Metdata"
@@ -31,13 +78,45 @@ export default function CreatePage() {
             hideLine
           />
         </TabList>
-        <TabPanels className="h-full max-w-lg md:w-lg">
-          <CreateFormMetadata />
-          <TabPanel>1</TabPanel>
-          <TabPanel>2</TabPanel>
-        </TabPanels>
+        <BalanceProvider>
+          <TabPanels className="h-full flex flex-col lg:w-xl">
+            <CreateFormMetadata
+              form={formMetadata}
+              onSubmit={(value) => {
+                setFormMetadata(value);
+                setTabIndex(tabIndex + 1);
+              }}
+            />
+            <CreateFormMarketCap
+              ticker={formMetadata.symbol}
+              form={formMaxMarketCap}
+              onSubmit={(value) => {
+                setFormMaxMarketCap(value);
+                setTabIndex(tabIndex + 1);
+              }}
+            />
+            <CreateFormDeposit
+              ticker={formMetadata.symbol}
+              form={formInitialBuyAmount}
+              onSubmit={async (value) => {
+                await new Promise((resolve) => {
+                  setFormInitialBuyAmount(() => {
+                    setTimeout(() => {
+                      resolve(null);
+                    }, 100);
+                    return value;
+                  });
+                });
+                await toast.promise(processTx(), {
+                  success: "Token successfully created",
+                  error: "Ooops! an unexpected error occur. Try again!",
+                  pending: "Sending transaction to chain...",
+                });
+              }}
+            />
+          </TabPanels>
+        </BalanceProvider>
       </TabGroup>
-     
     </>
   );
 }

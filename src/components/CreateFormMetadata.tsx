@@ -1,30 +1,29 @@
-import { useState } from "react";
 import { Formik, Form } from "formik";
 import { TabPanel } from "@headlessui/react";
 
-import { MintForm, validationSchema } from "@/form/MintForm";
+import { MintMetadataForm, validateMetadataSchema } from "@/form/MintForm";
 
 import Input from "./widgets/Input";
 import FileInput from "./widgets/FileInput";
-import CreateTokenBuyModal from "./CreateTokenBuyModal";
 
-export default function CreateFormMetadata() {
-  const [form, setForm] = useState<MintForm | null>(null);
+type CreateFormMetadataProps = {
+  form: MintMetadataForm;
+  onSubmit: (value: MintMetadataForm) => void;
+};
 
+export default function CreateFormMetadata({
+  form,
+  onSubmit,
+}: CreateFormMetadataProps) {
   return (
     <TabPanel>
       <Formik
-        validationSchema={validationSchema}
-        initialValues={{
-          name: "",
-          symbol: "",
-          image: "" as unknown as File,
-          description: "",
-          website: "",
-          telegram: "",
-          twitter: "",
+        validationSchema={validateMetadataSchema}
+        initialValues={form}
+        onSubmit={(value, { setSubmitting }) => {
+          onSubmit(value);
+          setSubmitting(false);
         }}
-        onSubmit={setForm}
       >
         {({ isSubmitting }) => (
           <Form className="flex flex-1 flex-col space-y-8">
@@ -73,18 +72,11 @@ export default function CreateFormMetadata() {
               type="submit"
               className="btn btn-primary"
             >
-              Create Token
+              Continue
             </button>
           </Form>
         )}
       </Formik>
-      {form && (
-        <CreateTokenBuyModal
-          form={form}
-          visible={Boolean(form)}
-          setVisible={() => setForm(null)}
-        />
-      )}
     </TabPanel>
   );
 }
