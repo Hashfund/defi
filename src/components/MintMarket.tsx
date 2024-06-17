@@ -36,11 +36,11 @@ export default function MintMarket({ mint, swaps }: MintMarketProps) {
                   target="_blank"
                 >
                   {swap.tradeDirection === 0 ? (
-                    <div className="rounded-md bg-green-200  text-green-700 px-2 py-1">
+                    <div className="rounded-md bg-green-200 px-2 py-1 text-green-700">
                       {truncateAddress(swap.payer)}
                     </div>
                   ) : (
-                    <div className="rounded-md bg-red-200 text-red-900 px-2 py-1">
+                    <div className="rounded-md bg-red-200 px-2 py-1 text-red-900">
                       {truncateAddress(swap.payer)}
                     </div>
                   )}
