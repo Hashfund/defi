@@ -22,8 +22,12 @@ export async function processForm(
   amount: number,
   decimals: number
 ) {
-  const safeAmount = unsafeBN(safeBN(amount, 9).mul(new BN(decimals)), 9);
-
+  console.log(amount);
+  const safeAmount = unsafeBN(
+    safeBN(amount, 6).mul(new BN(10).pow(new BN(6))),
+    6
+  );
+  console.log(safeAmount.toNumber());
   return wallet.sendTransaction(
     createSwapOutTransaction(
       wallet.publicKey!,

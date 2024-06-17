@@ -22,7 +22,7 @@ export async function processForm(
   amount: number
 ) {
   const safeAmount = unsafeBN(
-    safeBN(amount, 9).mul(new BN(10).pow(new BN(10))),
+    safeBN(amount, 9).mul(new BN(10).pow(new BN(9))),
     9
   );
 
