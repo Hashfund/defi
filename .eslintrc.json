@@ -1,6 +1,10 @@
 {
   "extends":[
+    "next",
     "next/core-web-vitals",
     "@unocss"
-  ]
+  ],
+  "rules": {
+    "react-hooks/exhaustive-deps": "off"
+  }
 }

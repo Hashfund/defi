@@ -12,13 +12,23 @@ export const createSwapInTransaction = async (
   mint: PublicKey,
   amount: BN
 ) => {
+  const tokenADestinationAccountIx =
+    await getOrCreateAssociatedTokenAccountInstructions(
+      connection,
+      mint,
+      payer,
+      payer,
+      false
+    );
+
   return new Transaction().add(
-    ...(await createSwapInInstruction({
+    ...tokenADestinationAccountIx,
+    createSwapInInstruction({
       connection,
       payer,
       tokenAMint: mint,
       data: { amount },
-    }))
+    })
   );
 };
 
@@ -28,6 +38,7 @@ export const createSwapOutTransaction = async (
   mint: PublicKey,
   amount: BN
 ) => {
+  
   return new Transaction().add(
     ...(await createSwapOutInstruction({
       connection,

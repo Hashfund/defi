@@ -1,7 +1,7 @@
 "use client";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { TabGroup, TabList, TabPanels } from "@headlessui/react";
 
@@ -41,6 +41,7 @@ export default function CreatePage() {
       initialBuyAmount: "" as unknown as number,
     });
 
+  /* */
   const processTx = async () => {
     const tx = await processForm(
       connection,
@@ -58,7 +59,7 @@ export default function CreatePage() {
       error: "Ooops! an unexpected error occur. Try again!",
       pending: "Sending transaction to chain...",
     });
-  }, [formInitialBuyAmount, processTx]);
+  }, [formInitialBuyAmount]);
 
   return (
     <>
