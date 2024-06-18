@@ -17,19 +17,19 @@ export default function MintInfoGrid({ mint }: MintInfoGridProps) {
       </div>
       <div>
         <small className="text-white/80 font-medium">24H Volume Change</small>
-        <p className="sol text-sm text-nowrap">{normalizeBNString(mint.last24HrVolume)}</p>
+        <p className="sol text-nowrap text-sm">{normalizeBNString(mint.last24HrVolume)}</p>
       </div>
       <div className="flex flex-col lt-md:items-end">
         <small className="text-white/80 font-medium">Total Volume</small>
-        <p className="sol text-sm text-nowrap">{normalizeBNString(mint.totalVolume)}</p>
+        <p className="sol text-nowrap text-sm">{normalizeBNString(mint.totalVolume)}</p>
       </div>
       <div>
         <small className="text-white/80 font-medium">Total Supply</small>
-        <p className="sol text-sm text-nowrap">{normalizeBNString(mint.totalSupply)}</p>
+        <p className="sol text-nowrap text-sm">{normalizeBNString(mint.totalSupply)}</p>
       </div>
       <div>
         <small className="text-white/80 font-medium">Market Cap</small>
-        <p className="sol text-sm text-nowrap">{normalizeBNString(mint.marketCap).toFixed(4)}</p>
+        <p className="sol text-nowrap text-sm">{normalizeBNString(mint.marketCap).toFixed(4)}</p>
       </div>
       <div className="flex flex-col lt-md:items-end">
         <small className="text-white/80 font-medium">Balance</small>
