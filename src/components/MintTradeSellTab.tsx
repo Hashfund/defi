@@ -45,7 +45,7 @@ export default function MintTradeSellTab({
           toast.promise(onSubmit(amount), {
             pending: "Sending transaction",
             error: "Failed to process transaction.",
-            success: "Token bought successfully",
+            success: "Token sold successfully",
           })
         }
       >

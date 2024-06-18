@@ -46,13 +46,14 @@ export const createMintTokenTransaction = async function ({
           maximumMarketCap ?? new BN(2_000).mul(new BN(10).pow(new BN(9))),
       },
     })),
-    createSwapInInstruction({
+    ...(await createSwapInInstruction({
+      connection,
       payer,
       tokenAMint,
       data: {
         amount: initialBuyAmount,
       },
-    }),
+    })),
   ];
 
   const transaction = new Transaction().add(...ixs);

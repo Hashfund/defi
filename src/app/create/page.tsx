@@ -1,7 +1,7 @@
 "use client";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { TabGroup, TabList, TabPanels } from "@headlessui/react";
 
@@ -34,11 +34,11 @@ export default function CreatePage() {
   });
   const [formMaxMarketCap, setFormMaxMarketCap] =
     useState<MintMaximumMarketCapForm>({
-      maximumMarketCap: 0,
+      maximumMarketCap: "" as unknown as number,
     });
   const [formInitialBuyAmount, setFormInitialBuyAmount] =
     useState<MintInitialBuyAmountForm>({
-      initialBuyAmount: 0,
+      initialBuyAmount: "" as unknown as number,
     });
 
   const processTx = async () => {
@@ -51,6 +51,14 @@ export default function CreatePage() {
     );
     window.open(Explorer.buildTx(tx));
   };
+
+  useEffect(() => {
+    toast.promise(processTx(), {
+      success: "Token successfully created",
+      error: "Ooops! an unexpected error occur. Try again!",
+      pending: "Sending transaction to chain...",
+    });
+  }, [formInitialBuyAmount]);
 
   return (
     <>
@@ -99,19 +107,7 @@ export default function CreatePage() {
               ticker={formMetadata.symbol}
               form={formInitialBuyAmount}
               onSubmit={async (value) => {
-                await new Promise((resolve) => {
-                  setFormInitialBuyAmount(() => {
-                    setTimeout(() => {
-                      resolve(null);
-                    }, 100);
-                    return value;
-                  });
-                });
-                await toast.promise(processTx(), {
-                  success: "Token successfully created",
-                  error: "Ooops! an unexpected error occur. Try again!",
-                  pending: "Sending transaction to chain...",
-                });
+                setFormInitialBuyAmount(value);
               }}
             />
           </TabPanels>

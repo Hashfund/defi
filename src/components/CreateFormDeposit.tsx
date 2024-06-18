@@ -41,9 +41,9 @@ export default function CreateFormDeposit({
           <Form className="flex flex-1 flex-col space-y-4">
             <div className="flex-1">
               <PriceInput
-                ticker={ticker}
+                ticker={"SOL"}
                 icon="/sol.png"
-                balance={0.000001}
+                balance={balance}
                 value={values.initialBuyAmount}
                 onChange={(value) => setFieldValue("initialBuyAmount", value)}
               />

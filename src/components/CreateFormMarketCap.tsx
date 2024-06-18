@@ -34,9 +34,8 @@ export default function CreateFormMarketCap({
           setSubmitting(false);
         }}
       >
-        {({ errors, values, isSubmitting, setFieldValue }) => (
+        {({ values, isSubmitting, setFieldValue }) => (
           <Form className="flex flex-1 flex-col space-y-8">
-            {JSON.stringify(errors)}
             <div className="flex flex-1 flex-col space-y-2">
               <PriceInput
                 balance={0}
