@@ -58,7 +58,7 @@ export default function CreatePage() {
       error: "Ooops! an unexpected error occur. Try again!",
       pending: "Sending transaction to chain...",
     });
-  }, [formInitialBuyAmount]);
+  }, [formInitialBuyAmount, processTx]);
 
   return (
     <>
