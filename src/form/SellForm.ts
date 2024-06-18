@@ -27,8 +27,11 @@ export async function processForm(
     6
   );
 
+  console.log(safeAmount.toNumber());
+
   return wallet.sendTransaction(
-    createSwapOutTransaction(
+    await createSwapOutTransaction(
+      connection,
       wallet.publicKey!,
       new PublicKey(mint),
       safeAmount

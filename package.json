@@ -11,7 +11,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@hashfund/program": "^2.10.0",
+    "@hashfund/program": "^2.11.0",
     "@headlessui/react": "^2.0.4",
     "@solana/spl-token": "^0.4.6",
     "@solana/wallet-adapter-base": "^0.9.23",
