@@ -18,7 +18,7 @@ export default function Provider({ children }: React.PropsWithChildren) {
           wallets={wallets}
           autoConnect
         >
-          <WalletModalProvider>{children}</WalletModalProvider>˝
+          <WalletModalProvider>{children}</WalletModalProvider>
         </WalletProvider>
       </ConnectionProvider>
     </NavigationProvider>

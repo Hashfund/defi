@@ -8,7 +8,7 @@ export const normalizeBNString = function (
   return unsafeBnToNumber(
     safeBN(value, decimals).div(new BN(10).pow(new BN(decimals))),
     decimals
-  ).toFixed(4);
+  );
 };
 
 export const log10BN = function (value: BN) {

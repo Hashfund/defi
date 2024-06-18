@@ -34,7 +34,7 @@ export default function MintInfo({ mint }: MintInfoProps) {
           </div>
           <div className="flex flex-1 flex-col space-y-2">
             <div className="flex items-center md:space-x-2">
-              <p className="text-lg lt-md:hidden">Pepe</p>
+              <p className="text-lg lt-md:hidden">{mint.name}</p>
               <div className="flex flex-1 items-center space-x-2">
                 <button className="flex items-center rounded-full bg-stone-950/50 px-4 py-1 space-x-2">
                   <FaTelegramPlane />

@@ -53,7 +53,7 @@ export default function MintMarket({ mint, swaps }: MintMarketProps) {
                   <div className="rounded px-2 py-0.5 text-red">Sell</div>
                 )}
               </td>
-              <td className="dollar">
+              <td className="sol">
                 {normalizeBNString(
                   swap.tradeDirection === 0 ? swap.amountIn : swap.amountOut
                 )}

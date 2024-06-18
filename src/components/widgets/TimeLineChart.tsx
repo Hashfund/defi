@@ -1,7 +1,8 @@
 "use client";
-import { Line } from "react-chartjs-2";
+import { Line, Bar } from "react-chartjs-2";
 import {
   LineElement,
+  BarElement,
   Chart,
   ArcElement,
   Tooltip,
@@ -15,6 +16,7 @@ import "chartjs-adapter-moment";
 import { Graph } from "@/lib/api/models/graph.model";
 
 Chart.register(
+  BarElement,
   LineElement,
   ArcElement,
   Tooltip,
@@ -31,14 +33,15 @@ type TimeLineChartProps = {
 
 export default function TimeLineChart({ data }: TimeLineChartProps) {
   return (
-    <Line
+    <Bar
       data={{
-        // labels: data.map(({ x }) => x),
         datasets: [
           {
             data: data,
-            backgroundColor: "#FAA46A",
+            barThickness: 55,
+            backgroundColor: "#86efac",
             borderColor: "#FAA46A",
+            borderRadius: 8,
             label: "Market Cap",
             parsing: { xAxisKey: "x", yAxisKey: "y" },
           },
@@ -48,10 +51,11 @@ export default function TimeLineChart({ data }: TimeLineChartProps) {
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: false
+            display: false,
           },
         },
         scales: {
+        
           x: {
             type: "time",
             display: false,
@@ -60,8 +64,9 @@ export default function TimeLineChart({ data }: TimeLineChartProps) {
             },
           },
           y: {
+            beginAtZero: true,
             display: false,
-          }
+          },
         },
       }}
     />
