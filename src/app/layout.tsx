@@ -13,7 +13,7 @@ import { defaultFont } from "@/assets/font";
 import { Navigation, Toolbar } from "@/components/layout";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.VERCEL_URL!),
+  metadataBase: new URL("https://" + process.env.VERCEL_URL!),
   title: "HashFund | Launch a coin that is instantly tradeable",
   description:
     "HashFund prevents rugs by making sure that all created tokens are safe. Eacg coin on hashfund is a fair-launch with no presale and no team allocation.",
