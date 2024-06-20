@@ -1,8 +1,8 @@
-import { safeBN, unsafeBN, unsafeBnToNumber } from "@solocker/safe-bn";
+import { safeBN, unsafeBnToNumber } from "@solocker/safe-bn";
 import BN from "bn.js";
 
 export const normalizeBNString = function (
-  value: string,
+  value: BN | string,
   decimals: number = 9
 ) {
   return unsafeBnToNumber(
@@ -10,6 +10,9 @@ export const normalizeBNString = function (
     decimals
   );
 };
+
+export const normalizeBN = (value: string, decimals: number = 9) =>
+  normalizeBNString(new BN(value).toString("hex"), decimals);
 
 export const log10BN = function (value: BN) {
   if (value.isZero()) return new BN(-Infinity);

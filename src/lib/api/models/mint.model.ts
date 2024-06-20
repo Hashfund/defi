@@ -30,9 +30,9 @@ export type Mint = {
   marketCap: string,
   totalSupply: string;
   boundingCurve: BoundingCurve;
-  totalVolume: string;
-  last24HrVolume: string;
-  last24HrVolumeChange: string,
-  last24HrVolumeChangePercentage: string;
+  volumeIn: string;
+  volumeOut: string;
+  volumeInFrom: string,
+  volumeOutFrom: string;
   signature: string
 };

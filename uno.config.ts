@@ -2,6 +2,7 @@ import {
   defineConfig,
   presetUno,
   presetWind,
+  presetAttributify,
   presetTypography,
   transformerDirectives,
   transformerVariantGroup,
@@ -13,11 +14,11 @@ export default defineConfig({
   },
   theme: {
     colors: {
-      amber: "#FFD700",
+      primary: "#FFD700",
+      secondary: "#b5a26d",
     },
   },
   shortcuts: {},
-  safelist: ["lt-md:fixed lt-md:inset-0"],
-  presets: [presetUno(), presetWind(), presetTypography()],
+  presets: [presetUno(), presetWind(), presetTypography(), presetAttributify()],
   transformers: [transformerDirectives(), transformerVariantGroup()],
 });

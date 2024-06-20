@@ -36,5 +36,6 @@ function buildAssetComponents(folder: string) {
 
 writeFileSync(
   "./src/assets/index.tsx",
-  buildAssetComponents("./src/assets").join("/n")
+  `import Image from "next/image"; \n` +
+    buildAssetComponents("./src/assets").join("\n")
 );

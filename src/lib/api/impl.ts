@@ -9,7 +9,7 @@ export abstract class Api {
     return this.path + "/" + args.join("/");
   }
 
-  protected buildQueryPath(path: string, query: Record<string, any>) {
+  protected buildQueryPath(path: string, query?: Record<string, any>) {
     const q = new URLSearchParams(query);
     return path + "?" + q.toString();
   }

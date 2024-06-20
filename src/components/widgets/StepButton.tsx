@@ -23,13 +23,13 @@ export default function StepButton({
     >
       {({ selected }) => (
         <>
-          <div className="flex items-center space-x-4">
+          <div className="flex lt-md:items-center space-x-4">
             <div>
               <div
                 className={clsx(
-                  "border border-green/50 text-green/50 text-black w-8 h-8 flex items-center justify-center rounded-full",
+                  "border border-secondary text-secondary text-black w-8 h-8 flex items-center justify-center rounded-full",
                   {
-                    "border-none bg-green ring-1 ring-green  ring-offset-4 ring-offset-black":
+                    "border-none bg-primary ring-1 ring-primary  ring-offset-4 ring-offset-black":
                       selected,
                   }
                 )}
@@ -39,7 +39,7 @@ export default function StepButton({
               {!hideLine && (
                 <div
                   className={clsx("ml-4 w-0.4 h-16 bg-green/50 lt-lg:hidden", {
-                    "bg-green": selected,
+                    "bg-primary": selected,
                   })}
                 />
               )}
@@ -47,14 +47,14 @@ export default function StepButton({
             <div className="flex flex-col">
               <p
                 className={clsx([
-                  selected ? "text-green-200" : "text-green-700",
+                  selected ? "text-primary" : "text-secondary",
                 ])}
               >
                 Step {position}
               </p>
               <p
                 className={clsx("lt-lg:hidden", [
-                  selected ? "text-green" : "text-green/50 ",
+                  selected ? "text-primary" : "text-secondary ",
                 ])}
               >
                 {title}
@@ -63,8 +63,8 @@ export default function StepButton({
           </div>
           {!hideLine && (
             <div
-              className={clsx("ml-4 flex-1 h-0.4 bg-green/50  lg:hidden", {
-                "bg-green": selected,
+              className={clsx("ml-4 flex-1 h-0.4 bg-secondary lg:hidden", {
+                "bg-primary": selected,
               })}
             />
           )}

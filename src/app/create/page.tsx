@@ -1,8 +1,8 @@
 "use client";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 
-import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
 import { TabGroup, TabList, TabPanels } from "@headlessui/react";
 
 import {
@@ -11,13 +11,12 @@ import {
   MintMetadataForm,
   processForm,
 } from "@/form/MintForm";
-
 import { Explorer } from "@/web3/link";
+import BalanceProvider from "@/providers/BalanceProvider";
 import StepButton from "@/components/widgets/StepButton";
 import CreateFormMetadata from "@/components/CreateFormMetadata";
 import CreateFormMarketCap from "@/components/CreateFormMarketCap";
 import CreateFormDeposit from "@/components/CreateFormDeposit";
-import BalanceProvider from "@/providers/BalanceProvider";
 
 export default function CreatePage() {
   const walletState = useWallet();
@@ -41,7 +40,6 @@ export default function CreatePage() {
       initialBuyAmount: "" as unknown as number,
     });
 
-  /* */
   const processTx = async () => {
     const tx = await processForm(
       connection,
@@ -54,11 +52,12 @@ export default function CreatePage() {
   };
 
   useEffect(() => {
-    toast.promise(processTx(), {
-      success: "Token successfully created",
-      error: "Ooops! an unexpected error occur. Try again!",
-      pending: "Sending transaction to chain...",
-    });
+    if (formInitialBuyAmount.initialBuyAmount)
+      toast.promise(processTx(), {
+        success: "Token successfully created",
+        error: "Ooops! an unexpected error occur. Try again!",
+        pending: "Sending transaction to chain...",
+      });
   }, [formInitialBuyAmount]);
 
   return (

@@ -1,10 +1,7 @@
 {
-  "extends":[
-    "next",
-    "next/core-web-vitals",
-    "@unocss"
-  ],
+  "extends": ["next", "next/core-web-vitals", "@unocss"],
   "rules": {
-    "react-hooks/exhaustive-deps": "off"
+    "react-hooks/exhaustive-deps": "off",
+    "jsx-a11y/alt-text": "off"
   }
 }

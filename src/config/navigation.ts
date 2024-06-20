@@ -1,7 +1,6 @@
 import { IconType } from "react-icons";
-import { FaQuestionCircle } from "react-icons/fa";
-import { FaTelegram, FaTwitter } from "react-icons/fa6";
-import { MdHome, MdLeaderboard, MdStopCircle } from "react-icons/md";
+import { FaTrophy } from "react-icons/fa";
+import { MdBarChart, MdHome, MdStopCircle, MdSwapHoriz } from "react-icons/md";
 
 type Navigation = {
   name: string;
@@ -15,29 +14,24 @@ export const layoutNavigations: Navigation[] = [
     href: "/",
     icon: MdHome,
   },
+  // {
+  //   name: "Swap",
+  //   href: "/swap",
+  //   icon: MdSwapHoriz,
+  // },
+  // {
+  //   name: "Stat",
+  //   href: "/stat",
+  //   icon: MdBarChart,
+  // },
   {
     name: "Leaderboard",
     href: "/leaderboard",
-    icon: MdLeaderboard,
+    icon: FaTrophy,
   },
   {
     name: "Mint",
     href: "/create",
     icon: MdStopCircle,
-  },
-  {
-    name: "Twitter",
-    href: "",
-    icon: FaTwitter,
-  },
-  {
-    name: "Telegram",
-    href: "",
-    icon: FaTelegram,
-  },
-  {
-    name: "Support",
-    href: "",
-    icon: FaQuestionCircle,
   },
 ];

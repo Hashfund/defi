@@ -25,32 +25,38 @@ table {
 }
 
 table th {
-  @apply font-light text-white/80 bg-black/20 py-4 text-nowrap cursor-pointer;
+  @apply font-light text-white/75 bg-black/20 py-4 text-nowrap cursor-pointer;
 }
 
-.dollar::after {
-  content: " SOL";
+.dollar::before {
+  content: "$ ";
   font-family: monospace;
 }
 
 .sol::after {
   content: " SOL";
-  font-family: monospace;
+  @apply text-sm;
 }
 
 th,
 td {
-  @apply p-2  whitespace-nowrap;
+  @apply p-4  whitespace-nowrap;
+}
+
+td, th {
+  @apply border-b border-dark-200;
 }
 
 .overflow-x-scroll {
-  scrollbar-width: 0px;
+  scrollbar-width: none;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
 .overflow-x-scroll::-webkit-scrollbar {
   width: 0;
   height: 0;
   display: none;
+  -webkit-appearance: none;
 }
 
 input::-webkit-outer-spin-button,
@@ -61,4 +67,14 @@ input::-webkit-inner-spin-button {
 
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+.per::after {
+  content: "%";
+  font-family: monospace;
+  @apply text-sm;
+}
+
+input {
+  @apply bg-transparent placeholder-white/50 outline-none!;
 }

@@ -1,23 +1,26 @@
+import moment from "moment";
 import Api from "@/lib/api";
 
-type TimeFrame = "24h" | "7d" | "1m";
-
-const reverseTimeFrame = (value: TimeFrame) => {
-  const now = new Date();
-
-  switch (value) {
-    case "24h":
-      const last24h = new Date();
-      last24h.setTime(last24h.getTime() - 24 * 60 * 60 * 1000);
-      return [last24h.toISOString(), now.toISOString()];
-  }
-
-  return [];
+export const TimeFrame = {
+  "24h": 1,
+  "7d": 7,
+  "30d": 30,
 };
 
-export default function useGraph(mint: string, timeFrame: TimeFrame) {
-  const [from, to] = reverseTimeFrame(timeFrame);
-  return Api.instance.swap
-    .getSwapsGraphByMint(mint, { from, to })
+const reverseTimeFrame = (key: keyof typeof TimeFrame) => {
+  const delta = TimeFrame[key];
+
+  return [
+    new Date().toISOString(),
+    moment()
+      .subtract(delta * 24, "hour")
+      .toISOString(),
+  ];
+};
+
+export default function useGraph(mint: string, timeFrame: string) {
+  const [from, to] = reverseTimeFrame(timeFrame as keyof typeof TimeFrame);
+  return Api.instance.mint
+    .getGraph(mint, { from, to, unit: timeFrame === "24h" ? "time" : "day" })
     .then(({ data }) => data);
 }

@@ -1,43 +1,46 @@
-import { Tab, TabGroup, TabList, TabPanels } from "@headlessui/react";
-
-import MintInfo from "@/components/MintInfo";
-import useMint from "@/composables/useMint";
-import useSwaps from "@/composables/useSwaps";
-import { RouteProps } from "@/types";
-import MintMarket from "@/components/MintMarket";
-import BalanceProvider from "@/providers/BalanceProvider";
+import {
+  MintInfoGraph,
+  Header,
+  MyInfo,
+  Info,
+  HodlList,
+  LiquidList,
+} from "@/components/mint-info";
 import useGraph from "@/composables/useGraph";
-import MintActivity from "@/components/MintActivity";
+import useLeaderboard from "@/composables/useLeaderboard";
+import useMint from "@/composables/useMint";
+import { RouteProps } from "@/types";
 
-export default async function MintPage(props: RouteProps) {
-  const mint = await useMint(props.params.mint);
-  const swaps = await useSwaps(props.params.mint);
-  const graph = await useGraph(props.params.mint, "24h");
+export default async function MintInfoPage({
+  params: { mint: qMint },
+  searchParams: { timeFrame },
+}: RouteProps) {
+  const mint = await useMint(qMint);
+  const graph = await useGraph(qMint, timeFrame ?? "24h");
+  const hodlers = await useLeaderboard(qMint, "volumeIn");
+  const liquidators = await useLeaderboard(qMint, "volumeOut");
 
   return (
-    <main className="flex flex-1 flex-col px-4 space-y-8 md:px-8">
-      {mint && (
-        <BalanceProvider mint={mint.id}>
-          <MintInfo mint={mint} />
-          <TabGroup className="flex flex-1 flex-col space-y-8">
-            <TabList className="self-start border border-amber rounded p-1">
-              <Tab className="rounded px-6 py-2 text-amber data-[selected]:bg-amber data-[selected]:text-black">
-                Market
-              </Tab>
-              <Tab className="rounded px-6 py-2 text-amber data-[selected]:bg-amber data-[selected]:text-black">
-                Activity
-              </Tab>
-            </TabList>
-            <TabPanels className="flex flex-1 flex-col">
-              <MintMarket
-                swaps={swaps.results}
-                mint={mint}
-              />
-              <MintActivity graph={graph} />
-            </TabPanels>
-          </TabGroup>
-        </BalanceProvider>
-      )}
+    <main className="flex flex-col space-y-8">
+      <Header mint={mint} />
+      <MintInfoGraph mint={mint} graph={graph} />
+      <MyInfo mint={mint} />
+
+      <div
+        className="flex px-4"
+        lt-md="flex-col"
+        md="space-x-4 px-8"
+      >
+        <HodlList
+          leaderboard={hodlers}
+          className="flex-1"
+        />
+        <LiquidList
+          leaderboard={liquidators}
+          className="flex-1"
+        />
+      </div>
+      <Info mint={mint} />
     </main>
   );
 }
