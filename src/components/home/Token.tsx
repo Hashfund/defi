@@ -40,6 +40,7 @@ export function Token({ mints }: TokenProps) {
               <th>Price</th>
               <th>24h Change</th>
               <th>24h Volume</th>
+              <th>Volume</th>
               <th>Max Marketcap</th>
               <th>Collateral Weight</th>
               <th>Marketcap</th>
@@ -75,6 +76,7 @@ export function Token({ mints }: TokenProps) {
                   ) ?? 0}
                 </td>
                 <td className="sol">{normalizeBN(mint.volumeInFrom)}</td>
+                <td className="sol">{normalizeBN(mint.volumeIn)}</td>
                 <td className="sol">
                   {normalizeBN(mint.boundingCurve?.maximumMarketCap ?? 0)}
                 </td>

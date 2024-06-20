@@ -2,8 +2,6 @@ import BN from "bn.js";
 
 import { safeBN, unsafeBN } from "@solocker/safe-bn";
 import {
-  useConnection,
-  useWallet,
   WalletContextState,
 } from "@solana/wallet-adapter-react";
 
@@ -25,7 +23,10 @@ export const validateMetadataSchema = object().shape({
 });
 
 export const validateMaximumMarketCapSchema = object().shape({
-  maximumMarketCap: number().moreThan(0, "Invalid amount").required(),
+  maximumMarketCap: number()
+    .moreThan(0, "Invalid amount")
+    .lessThan(10 * (10 ^ 9))
+    .required(),
 });
 
 export const createInitialDepositSchema = (balance: number) =>
@@ -62,8 +63,6 @@ export const processForm = async function (
   { maximumMarketCap }: MintMaximumMarketCapForm,
   { initialBuyAmount }: MintInitialBuyAmountForm
 ) {
-  console.log("initialBuy=", initialBuyAmount )
-  console.log("maximumMarketCap=", maximumMarketCap )
   const mint = findMintAddress(name, symbol, publicKey!);
 
   let uri = await createTokenRichMetadata(

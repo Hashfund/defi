@@ -11,8 +11,13 @@ export const normalizeBNString = function (
   );
 };
 
-export const normalizeBN = (value: string, decimals: number = 9) =>
-  normalizeBNString(new BN(value).toString("hex"), decimals);
+export const normalizeBN = (value: string, decimals: number = 9) => {
+  try {
+    return normalizeBNString(new BN(value).toString("hex"), decimals);
+  } catch {
+    return Math.pow(10, 9);
+  }
+};
 
 export const log10BN = function (value: BN) {
   if (value.isZero()) return new BN(-Infinity);
@@ -31,4 +36,8 @@ export const log10BN = function (value: BN) {
   const fractionalLog = Math.log10(mantissa);
 
   return new BN(integerLog + fractionalLog);
+};
+
+export const safeBnToNumber = function (value: BN, decimals: number = 3) {
+  return BigInt(value.toString()) / BigInt(Math.pow(10, decimals));
 };
