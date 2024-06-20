@@ -18,11 +18,11 @@ export default function Button() {
         className="relative"
       >
         <Button className="btn btn-primary flex truncate outline-none space-x-2">
-          {wallet ? (
+          {wallet && publicKey ? (
             <>
               <Image
-                src={wallet?.adapter.icon}
-                alt={wallet?.adapter.name}
+                src={wallet.adapter.icon}
+                alt={wallet.adapter.name}
                 width={24}
                 height={24}
               />

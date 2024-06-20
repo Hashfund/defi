@@ -15,16 +15,19 @@ export const createValidationSchema = (balance: number) =>
       .moreThan(0, "At least decimal greater then 0"),
   });
 
-export async function processForm(
+export async function processBuyForm(
   wallet: WalletContextState,
   connection: Connection,
   mint: string,
-  amount: number
+  amount: number,
+  decimals = 9
 ) {
   const safeAmount = unsafeBN(
-    safeBN(amount, 9).mul(new BN(10).pow(new BN(9))),
-    9
+    safeBN(amount, decimals).mul(new BN(10).pow(new BN(decimals))),
+    decimals
   );
+
+  console.log(safeAmount.toNumber());
 
   return wallet.sendTransaction(
     await createSwapInTransaction(

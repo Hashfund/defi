@@ -9,6 +9,7 @@ import {
 import useGraph from "@/composables/useGraph";
 import useLeaderboard from "@/composables/useLeaderboard";
 import useMint from "@/composables/useMint";
+import BalanceProvider from "@/providers/BalanceProvider";
 import { RouteProps } from "@/types";
 
 export default async function MintInfoPage({
@@ -21,26 +22,31 @@ export default async function MintInfoPage({
   const liquidators = await useLeaderboard(qMint, "volumeOut");
 
   return (
-    <main className="flex flex-col space-y-8">
-      <Header mint={mint} />
-      <MintInfoGraph mint={mint} graph={graph} />
-      <MyInfo mint={mint} />
+    <BalanceProvider mint={mint.id}>
+      <main className="flex flex-col space-y-8">
+        <Header mint={mint} />
+        <MintInfoGraph
+          mint={mint}
+          graph={graph}
+        />
+        <MyInfo mint={mint} />
 
-      <div
-        className="flex px-4"
-        lt-md="flex-col"
-        md="space-x-4 px-8"
-      >
-        <HodlList
-          leaderboard={hodlers}
-          className="flex-1"
-        />
-        <LiquidList
-          leaderboard={liquidators}
-          className="flex-1"
-        />
-      </div>
-      <Info mint={mint} />
-    </main>
+        <div
+          className="flex px-4"
+          lt-md="flex-col"
+          md="space-x-4 px-8"
+        >
+          <HodlList
+            leaderboard={hodlers}
+            className="flex-1"
+          />
+          <LiquidList
+            leaderboard={liquidators}
+            className="flex-1"
+          />
+        </div>
+        <Info mint={mint} />
+      </main>
+    </BalanceProvider>
   );
 }

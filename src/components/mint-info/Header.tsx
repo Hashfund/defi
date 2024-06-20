@@ -56,7 +56,7 @@ export function Header({ mint }: HeaderProps) {
             </div>
           </div>
         </div>
-        <SwapButton />
+        <SwapButton mint={mint} />
       </div>
     </header>
   );
