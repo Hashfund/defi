@@ -27,8 +27,6 @@ export async function processBuyForm(
     decimals
   );
 
-  console.log(mint);
-
   return wallet.sendTransaction(
     await createSwapInTransaction(
       connection,

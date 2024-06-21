@@ -20,8 +20,6 @@ export async function processSellForm(
     decimals
   );
 
-  console.log(safeAmount.toNumber());
-
   return wallet.sendTransaction(
     await createSwapOutTransaction(
       connection,

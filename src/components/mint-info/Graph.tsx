@@ -7,6 +7,7 @@ import {
   LinearScale,
   PointElement,
   TimeScale,
+  CategoryScale,
 } from "chart.js";
 import "chartjs-adapter-moment";
 import TimeFilter from "../widgets/TimeFilter";
@@ -17,7 +18,14 @@ import { normalizeBN } from "@/web3/decimal";
 import moment from "moment";
 import { calculateBNPercentile } from "@/web3/math";
 
-Chart.register(LineElement, Tooltip, TimeScale, LinearScale, PointElement);
+Chart.register(
+  LineElement,
+  Tooltip,
+  TimeScale,
+  LinearScale,
+  PointElement,
+  CategoryScale
+);
 
 type GraphProps = {
   mint: Mint;
@@ -36,13 +44,10 @@ export function MintInfoGraph({ mint, graph }: GraphProps) {
         <div className="flex flex-1 flex-col">
           <div className="flex items-center space-x-4">
             <h1 className="sol text-4xl font-bold">
-              {normalizeBN(selected?.volumeIn ?? mint.volumeIn)}
+              {normalizeBN(selected.marketCap)}
             </h1>
             <p className="per self-end text-sm text-green">
-              {calculateBNPercentile(
-                mint.volumeIn,
-                selected?.volumeIn ?? mint.volumeIn
-              )}
+              {calculateBNPercentile(selected.marketCap, mint.marketCap)}
             </p>
           </div>
           <div>
@@ -51,21 +56,22 @@ export function MintInfoGraph({ mint, graph }: GraphProps) {
             </p>
           </div>
         </div>
-        <TimeFilter />
+        <TimeFilter className="!hidden" />
       </div>
       <div className="flex-1">
         <Line
           data={{
             datasets: [
               {
-                // @ts-ignore
-                lineTension: 0.3,
+                label: "MarketCap",
                 borderColor: "#FAA46A",
-                data: graph.map(({ date, volumeIn }) => ({
-                  date,
-                  volumeIn: normalizeBN(volumeIn),
+                // @ts-ignore
+                //lineTension: 0.1,
+                data: graph.map((data) => ({
+                  date: data.date,
+                  volumeIn: normalizeBN(data.marketCap),
                 })),
-                parsing: { xAxisKey: "volumeIn", yAxisKey: "date" },
+                parsing: { xAxisKey: "date", yAxisKey: "volumeIn" },
               },
             ],
           }}
@@ -78,18 +84,23 @@ export function MintInfoGraph({ mint, graph }: GraphProps) {
             },
             scales: {
               x: {
+                display: false,
                 type: "time",
                 time: {
-                  unit: "hour",
+                  unit: "day",
+                  displayFormats: {
+                    day: "Do MMMM YYYY, hh:mm a",
+                  },
                 },
               },
               y: {
-                beginAtZero: true,
+                display: false,
               },
             },
             onHover(e, data) {
-              if(data.length > 0)
-              setSelected(graph[data[0].index]);
+              if (data.length > 0) {
+                setSelected(graph[data[0].index]);
+              }
             },
           }}
         />

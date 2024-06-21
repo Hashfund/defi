@@ -1,5 +1,6 @@
 import moment from "moment";
 import Api from "@/lib/api";
+import { normalizeBN } from "@/web3/decimal";
 
 export const TimeFrame = {
   "24h": 1,
@@ -11,16 +12,19 @@ const reverseTimeFrame = (key: keyof typeof TimeFrame) => {
   const delta = TimeFrame[key];
 
   return [
-    new Date().toISOString(),
     moment()
       .subtract(delta * 24, "hour")
       .toISOString(),
+    new Date().toISOString(),
   ];
 };
 
-export default function useGraph(mint: string, timeFrame: string) {
-  const [from, to] = reverseTimeFrame(timeFrame as keyof typeof TimeFrame);
-  return Api.instance.mint
-    .getGraph(mint, { from, to, unit: timeFrame === "24h" ? "time" : "day" })
-    .then(({ data }) => data);
+export default function useGraph(mint: string, timeFrame?: string) {
+  if (timeFrame) {
+    const [from, to] = reverseTimeFrame(timeFrame as keyof typeof TimeFrame);
+    return Api.instance.swap
+      .getSwapsByMint(mint, { from, to })
+      .then(({ data }) => data);
+  }
+  return Api.instance.swap.getSwapsByMint(mint).then(({ data }) => data);
 }

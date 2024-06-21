@@ -6,13 +6,15 @@ import { Graph } from "./models/graph.model";
 export class SwapApi extends Api {
   path = "swaps";
 
-  getSwapsByMint(mint: string) {
-    return this.axios.get<LimitOffsetPagination<Swap>>(this.buildPath(mint));
+  getSwaps(query: Record<string, string>) {
+    return this.axios.get<LimitOffsetPagination<Swap>>(
+      this.buildQueryPath(this.path, query)
+    );
   }
 
-  getSwapsGraphByMint(mint: string, filter: { from: string; to: string }) {
+  getSwapsByMint(mint: string, filter?: { from: string; to: string }) {
     return this.axios.get<Graph[]>(
-      this.buildQueryPath(this.buildPath("graph", mint), filter)
+      this.buildQueryPath(this.buildPath(mint), filter)
     );
   }
 }

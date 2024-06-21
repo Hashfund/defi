@@ -17,7 +17,7 @@ export default async function MintInfoPage({
   searchParams: { timeFrame },
 }: RouteProps) {
   const mint = await useMint(qMint);
-  const graph = await useGraph(qMint, timeFrame ?? "24h");
+  const graph = await useGraph(qMint, timeFrame);
   const hodlers = await useLeaderboard(qMint, "volumeIn");
   const liquidators = await useLeaderboard(qMint, "volumeOut");
 

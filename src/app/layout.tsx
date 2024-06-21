@@ -3,7 +3,6 @@ import "react-toastify/dist/ReactToastify.css";
 import "@solana/wallet-adapter-react-ui/styles.css";
 
 import clsx from "clsx";
-import Image from "next/image";
 
 import type { Metadata, Viewport } from "next";
 import { ToastContainer } from "react-toastify";
@@ -11,7 +10,7 @@ import { ToastContainer } from "react-toastify";
 import "@/globals.css";
 import Provider from "@/providers";
 import { defaultFont } from "@/assets/font";
-import { LayoutBackground, Navigation, Toolbar } from "@/components/layout";
+import { Navigation, Toolbar } from "@/components/layout";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://" + process.env.VERCEL_URL!),
@@ -40,7 +39,6 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
         )}
         lt-md="flex-col"
       >
-       <LayoutBackground />
         <Provider>
           <Navigation className="border-dark lt-md:order-last lt-md:border-t-1 md:border-r-1" />
           <div className="flex flex-1 flex-col overflow-x-hidden overflow-y-scroll space-y-8">
