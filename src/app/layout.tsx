@@ -3,6 +3,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "@solana/wallet-adapter-react-ui/styles.css";
 
 import clsx from "clsx";
+import Image from "next/image";
 
 import type { Metadata, Viewport } from "next";
 import { ToastContainer } from "react-toastify";
@@ -39,6 +40,20 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
         )}
         lt-md="flex-col"
       >
+        <Image
+          src="/abstract.png"
+          alt="abstract"
+          width={512}
+          height={512}
+          className="absolute -z-10"
+        />
+        <Image
+          src="/abstract.png"
+          alt="abstract"
+          width={512}
+          height={512}
+          className="absolute top-106 -left-8 rotate-90 -z-10"
+        />
         <Provider>
           <Navigation className="border-dark lt-md:order-last lt-md:border-t-1 md:border-r-1" />
           <div className="flex flex-1 flex-col overflow-x-hidden overflow-y-scroll space-y-8">

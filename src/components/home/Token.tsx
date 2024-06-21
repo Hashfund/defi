@@ -1,10 +1,7 @@
 import Image from "next/image";
 import { Mint } from "@/lib/api/models";
 import { normalizeBN } from "@/web3/decimal";
-import {
-  calculateMarketcapWeight,
-  calculateBNPercentile,
-} from "@/web3/math";
+import { calculateMarketcapWeight, calculateBNPercentile } from "@/web3/math";
 import Link from "next/link";
 
 type TokenProps = {
@@ -67,13 +64,12 @@ export function Token({ mints }: TokenProps) {
                   </Link>
                 </td>
                 <td className="sol">
-                  {normalizeBN(mint.boundingCurve?.initialPrice ?? 0)}
+                  <Link href={mint.id}>
+                    {normalizeBN(mint.boundingCurve?.initialPrice ?? 0)}
+                  </Link>
                 </td>
                 <td className="per">
-                  {calculateBNPercentile(
-                    mint.volumeIn,
-                    mint.volumeInFrom
-                  ) ?? 0}
+                  {calculateBNPercentile(mint.volumeIn, mint.volumeInFrom) ?? 0}
                 </td>
                 <td className="sol">{normalizeBN(mint.volumeInFrom)}</td>
                 <td className="sol">{normalizeBN(mint.volumeIn)}</td>

@@ -33,6 +33,15 @@ import {
   TrustWalletAdapter,
   XDEFIWalletAdapter,
 } from "@solana/wallet-adapter-wallets";
+import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
+
+import {
+  SolanaMobileWalletAdapter,
+  createDefaultAddressSelector,
+  createDefaultWalletNotFoundHandler,
+  createDefaultAuthorizationResultCache,
+  /**@ts-ignore */
+} from "@solana-mobile/wallet-adapter-mobile";
 import { useMemo } from "react";
 
 export const useWalletList = () => {
@@ -71,6 +80,17 @@ export const useWalletList = () => {
       new TrezorWalletAdapter(),
       new TrustWalletAdapter(),
       new XDEFIWalletAdapter(),
+      new SolanaMobileWalletAdapter({
+        addressSelector: createDefaultAddressSelector(),
+        appIdentity: {
+          name: "My app",
+          uri: "https://myapp.io",
+          icon: "relative/path/to/icon.png",
+        },
+        authorizationResultCache: createDefaultAuthorizationResultCache(),
+        cluster: WalletAdapterNetwork.Devnet,
+        onWalletNotFound: createDefaultWalletNotFoundHandler(),
+      }),
     ],
     []
   );

@@ -1,16 +1,19 @@
 "use client";
 import { PublicKey } from "@solana/web3.js";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+
 import { PopoverPanel } from "@headlessui/react";
+
+import { toast } from "react-toastify";
 import { MdArrowDownward } from "react-icons/md";
 
 import { Formik, Form, ErrorMessage } from "formik";
 
-import TokenPriceInput from "./TokenPriceInput";
-import { createValidationSchema, processBuyForm } from "@/form/BuyForm";
-import { processSellForm } from "@/form/SellForm";
-import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { Explorer } from "@/web3/link";
-import { toast } from "react-toastify";
+import { processSellForm } from "@/form/SellForm";
+import { createValidationSchema, processBuyForm } from "@/form/BuyForm";
+
+import TokenPriceInput from "./TokenPriceInput";
 
 type Side = {
   mint: PublicKey;
@@ -18,6 +21,7 @@ type Side = {
   ticker: string;
   image: string;
   decimals: number;
+  initialPrice: number;
 };
 
 type SwapModalProps = {
@@ -37,14 +41,14 @@ export default function SwapModal({
   const { connection } = useConnection();
   const validationSchema = createValidationSchema(sideA.balance);
 
-  const processForm = async (buyAmount: number, sellAmount: number) => {
+  const processForm = async (buyAmount: string, sellAmount: string) => {
     let tx: string | undefined;
 
     if (side === "buy")
       tx = await processBuyForm(
         wallet,
         connection,
-        sideA.mint.toBase58(),
+        sideB.mint.toBase58(),
         buyAmount,
         sideA.decimals
       );
@@ -62,15 +66,15 @@ export default function SwapModal({
 
   return (
     <PopoverPanel
-      className="absolute flex flex-col rounded bg-amber/5 p-4 backdrop-blur-3xl space-y-4"
+      className="absolute flex flex-col rounded bg-dark-100/20 p-4 backdrop-blur-3xl space-y-4"
       lt-md="right-2 max-w-sm"
       md="right-8"
     >
       <Formik
         validationSchema={validationSchema}
         initialValues={{
-          buyAmount: 0,
-          sellAmount: 0,
+          buyAmount: "",
+          sellAmount: "",
         }}
         onSubmit={({ buyAmount, sellAmount }, { setSubmitting }) => {
           toast
@@ -82,40 +86,71 @@ export default function SwapModal({
             .finally(() => setSubmitting(false));
         }}
       >
-        {({ setFieldValue, isSubmitting }) => (
-          <Form>
-            <div className="flex flex-col rounded-md bg-secondary/10 p-4 space-y-2">
-              <div className="flex text-xs text-white/75">
-                <p className="flex-1">Sell</p>
-                <p>Wallet: {sideA.balance.toFixed(4)}</p>
+        {({ values, errors, setFieldValue, isSubmitting }) => (
+          <Form className="flex flex-col space-y-8">
+            <div className="flex flex-col space-y-4">
+              <div className="flex flex-col rounded-md bg-dark-500 p-4 space-y-2">
+                <div className="flex text-xs text-white/75">
+                  <p className="flex-1">Sell</p>
+                  <p>Wallet: {sideA.balance.toFixed(4)}</p>
+                </div>
+                <TokenPriceInput
+                  name="buyAmount"
+                  image={sideA.image}
+                  ticker={sideA.ticker}
+                  balance={sideA.balance}
+                  onChange={(value) => {
+                    if (side === "buy") {
+                      setFieldValue(
+                        "sellAmount",
+                        value * sideB.initialPrice * Math.pow(10, 12)
+                      );
+                    } else {
+                      setFieldValue("sellAmount", value * sideB.initialPrice);
+                    }
+                  }}
+                />
+                <small className="text-red first-letter:uppercase">
+                  <ErrorMessage name="buyAmount" />
+                </small>
               </div>
-              <TokenPriceInput
-                image={sideA.image}
-                ticker={sideA.ticker}
-                onChange={(value) => setFieldValue("buyAmount", value)}
-              />
-              <small className="text-red first-letter:uppercase">
-                <ErrorMessage name="buyAmount" />
-              </small>
+              <button
+                type="button"
+                className="self-center border border-secondary rounded-full p-2 text-secondary"
+                onClick={onSwapSide}
+              >
+                <MdArrowDownward />
+              </button>
+              <div className="flex flex-col rounded-md bg-dark-500 p-4 space-y-2">
+                <div className="flex text-xs text-white/75">
+                  <p className="flex-1">Buy</p>
+                </div>
+                <TokenPriceInput
+                  name="sellAmount"
+                  image={sideB.image}
+                  ticker={sideB.ticker}
+                  onChange={(value) => {
+                    if (side === "buy") {
+                      setFieldValue(
+                        "buyAmount",
+                        (value / sideB.initialPrice / Math.pow(10, 12)).toFixed(
+                          4
+                        )
+                      );
+                    } else {
+                      setFieldValue("buyAmount", value * sideB.initialPrice);
+                    }
+                  }}
+                />
+              </div>
             </div>
             <button
-              type="button"
-              className="self-center border border-secondary rounded-full p-2 text-secondary"
-              onClick={onSwapSide}
+              type="submit"
+              disabled={isSubmitting}
+              className="btn bg-primary"
             >
-              <MdArrowDownward />
+              Proceed
             </button>
-            <div className="flex flex-col rounded-md bg-secondary/10 p-4 space-y-2">
-              <div className="flex text-xs text-white/75">
-                <p className="flex-1">Buy</p>
-              </div>
-              <TokenPriceInput
-                image={sideB.image}
-                ticker={sideB.ticker}
-                onChange={(value) => setFieldValue("sellAmount", value)}
-              />
-            </div>
-            <button className="btn btn-primary">Proceed</button>
           </Form>
         )}
       </Formik>

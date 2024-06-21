@@ -8,6 +8,7 @@ import { Popover, PopoverButton } from "@headlessui/react";
 import SwapModal from "./Modal";
 import { Mint } from "@/lib/api/models";
 import useBalance from "@/composables/useBalance";
+import { normalizeBN } from "@/web3/decimal";
 
 type SwapButtonProps = {
   mint: Mint;
@@ -23,6 +24,7 @@ export function SwapButton({ mint }: SwapButtonProps) {
       decimals: 9,
       ticker: "SOL",
       image: "/sol.png",
+      initialPrice: normalizeBN(mint.boundingCurve.initialPrice),
     }),
     [solBalance]
   );
@@ -34,6 +36,7 @@ export function SwapButton({ mint }: SwapButtonProps) {
       decimals: mintBalance?.decimals ?? 6,
       ticker: mint.ticker,
       image: mint.metadata.image,
+      initialPrice: normalizeBN(mint.boundingCurve.initialPrice),
     }),
     [mintBalance]
   );

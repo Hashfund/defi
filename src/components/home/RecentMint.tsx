@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import Link from "next/link";
 import Image from "next/image";
 import { MdBolt } from "react-icons/md";
 
@@ -29,9 +30,10 @@ export function RecentMint({ className, mints }: RecentMintProps) {
       </div>
       <div className="flex flex-col divide-y divide-dark">
         {mints.map((mint) => (
-          <div
+          <Link
             key={mint.id}
-            className="flex px-4 py-2 space-x-2"
+            href={mint.id}
+            className="flex items-center px-4 py-2 space-x-2"
           >
             <div className="flex flex-1 items-center space-x-2">
               <Image
@@ -50,7 +52,7 @@ export function RecentMint({ className, mints }: RecentMintProps) {
                 </p>
               )}
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </section>

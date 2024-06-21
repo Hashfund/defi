@@ -13,7 +13,10 @@ export default function Provider({ children }: React.PropsWithChildren) {
 
   return (
     <NavigationProvider>
-      <ConnectionProvider endpoint={clusterApiUrl("devnet")}>
+      <ConnectionProvider
+        endpoint={clusterApiUrl("devnet")}
+        config={{ commitment: "single" }}
+      >
         <WalletProvider
           wallets={wallets}
           autoConnect

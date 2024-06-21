@@ -1,5 +1,7 @@
 import clsx from "clsx";
+import Link from "next/link";
 import Image from "next/image";
+
 import { FaHashtag } from "react-icons/fa";
 
 import { Mint } from "@/lib/api/models";
@@ -27,8 +29,9 @@ export function RecentFreed({ className, mints }: RecentFreedProps) {
       {mints.length > 0 ? (
         <div className="flex flex-col divide-y divide-dark">
           {mints.map((mint) => (
-            <div
+            <Link
               key={mint.id}
+              href={mint.id}
               className="flex px-4 py-2 space-x-2"
             >
               <div className="flex flex-1 items-center space-x-2">
@@ -46,11 +49,11 @@ export function RecentFreed({ className, mints }: RecentFreedProps) {
                   {normalizeBN(mint.boundingCurve.initialPrice)}
                 </p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       ) : (
-        <div className="flex flex-col self-center text-center space-y-2">
+        <div className="flex flex-1 flex-col self-center justify-center text-center space-y-2">
           <p>No Token Migrated yet</p>
           <button className="btn btn-primary">Buy</button>
         </div>

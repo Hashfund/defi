@@ -8,12 +8,12 @@
 }
 
 .btn-primary {
-  @apply bg-amber;
+  @apply bg-gradient-to-r from-primary to-secondary
 }
 
 .btn-primary:hover,
 .btn-primary:active {
-  @apply from-amber/80 to-green/80;
+  @apply from-primary/80 to-secondary/80;
 }
 
 .input-with-icon:focus-within svg {
