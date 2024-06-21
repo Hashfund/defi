@@ -66,7 +66,7 @@ export default function SwapModal({
 
   return (
     <PopoverPanel
-      className="absolute flex flex-col rounded bg-dark-100/20 p-4 backdrop-blur-3xl space-y-4"
+      className="absolute flex flex-col rounded bg-dark-900 p-4 backdrop-blur-3xl space-y-4"
       lt-md="right-2 max-w-sm"
       md="right-8"
     >
@@ -89,7 +89,7 @@ export default function SwapModal({
         {({ values, errors, setFieldValue, isSubmitting }) => (
           <Form className="flex flex-col space-y-8">
             <div className="flex flex-col space-y-4">
-              <div className="flex flex-col rounded-md bg-dark-500 p-4 space-y-2">
+              <div className="flex flex-col rounded-md bg-dark-500/50 p-4 space-y-2">
                 <div className="flex text-xs text-white/75">
                   <p className="flex-1">Sell</p>
                   <p>Wallet: {sideA.balance.toFixed(4)}</p>
@@ -121,7 +121,7 @@ export default function SwapModal({
               >
                 <MdArrowDownward />
               </button>
-              <div className="flex flex-col rounded-md bg-dark-500 p-4 space-y-2">
+              <div className="flex flex-col rounded-md bg-dark-500/50 p-4 space-y-2">
                 <div className="flex text-xs text-white/75">
                   <p className="flex-1">Buy</p>
                 </div>

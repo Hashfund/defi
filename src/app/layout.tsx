@@ -11,7 +11,7 @@ import { ToastContainer } from "react-toastify";
 import "@/globals.css";
 import Provider from "@/providers";
 import { defaultFont } from "@/assets/font";
-import { Navigation, Toolbar } from "@/components/layout";
+import { LayoutBackground, Navigation, Toolbar } from "@/components/layout";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://" + process.env.VERCEL_URL!),
@@ -40,20 +40,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
         )}
         lt-md="flex-col"
       >
-        <Image
-          src="/abstract.png"
-          alt="abstract"
-          width={512}
-          height={512}
-          className="absolute -z-10"
-        />
-        <Image
-          src="/abstract.png"
-          alt="abstract"
-          width={512}
-          height={512}
-          className="absolute top-106 -left-8 rotate-90 -z-10"
-        />
+       <LayoutBackground />
         <Provider>
           <Navigation className="border-dark lt-md:order-last lt-md:border-t-1 md:border-r-1" />
           <div className="flex flex-1 flex-col overflow-x-hidden overflow-y-scroll space-y-8">
