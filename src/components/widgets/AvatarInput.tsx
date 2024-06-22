@@ -25,7 +25,7 @@ export default function AvatarInput({ name }: AvatarProps) {
         }}
       />
       <div
-        className="bg-secondary/10 p-2 rounded-full cursor-pointer"
+        className="cursor-pointer rounded-full bg-secondary/10 p-2"
         onClick={() => fileRef.current?.click()}
       >
         <div className="relative">
@@ -38,9 +38,9 @@ export default function AvatarInput({ name }: AvatarProps) {
               className="rounded-full"
             />
           ) : (
-            <MdAccountCircle className="text-white/75 text-4xl" />
+            <MdAccountCircle className="text-4xl text-white/75" />
           )}
-          <div className="absolute -top-2 -right-2 bg-amber  text-black rounded-full">
+          <div className="absolute rounded-full bg-amber text-black -right-2 -top-2">
             <MdAdd className="text-xl" />
           </div>
         </div>

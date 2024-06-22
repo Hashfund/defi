@@ -13,7 +13,7 @@ type ProfileHeaderProps = {
 export function ProfileHeader({ user, mints, tokens }: ProfileHeaderProps) {
   return (
     <section
-      className="flex space-x-4 px-4"
+      className="flex px-4 space-x-4"
       md="px-8"
     >
       <div>
@@ -22,18 +22,18 @@ export function ProfileHeader({ user, mints, tokens }: ProfileHeaderProps) {
           width={128}
           height={128}
           alt={user.name}
-          className="w-12 h-12 bg-red rounded-full"
+          className="h-12 w-12 rounded-full bg-red"
         />
       </div>
       <div className="flex flex-col space-y-2">
         <div>
           <h1>{user.name}</h1>
           <div className="flex space-x-4">
-            <div className="flex items-center space-x-1 text-green">
+            <div className="flex items-center text-green space-x-1">
               <MdSquare />
               <span>{mints} Mints</span>
             </div>
-            <div className="flex items-center space-x-1 text-purple">
+            <div className="flex items-center text-purple space-x-1">
               <MdDiamond />
               <span>{tokens} Tokens</span>
             </div>

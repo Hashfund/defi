@@ -26,10 +26,10 @@ export default function EditProfile() {
 
   return (
     <Popover className="flex flex-col space-y-10">
-      <PopoverButton className="self-start border border-secondary text-secondary px-2 py-1 rounded outline-none">
+      <PopoverButton className="self-start border border-secondary rounded px-2 py-1 text-secondary outline-none">
         Edit Profile
       </PopoverButton>
-      <PopoverPanel className="absolute flex flex-col space-y-8 bg-dark p-4 rounded-xl">
+      <PopoverPanel className="absolute flex flex-col rounded-xl bg-dark p-4 space-y-8">
         <div>
           <h1 className="text-xl font-bold">Edit Profile</h1>
         </div>

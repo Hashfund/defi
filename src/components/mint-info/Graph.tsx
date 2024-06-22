@@ -1,4 +1,6 @@
 "use client";
+import moment from "moment";
+import { useState } from "react";
 import { Line } from "react-chartjs-2";
 import {
   LineElement,
@@ -10,13 +12,14 @@ import {
   CategoryScale,
 } from "chart.js";
 import "chartjs-adapter-moment";
-import TimeFilter from "../widgets/TimeFilter";
+
 import { Mint } from "@/lib/api/models";
 import { Graph } from "@/lib/api/models/graph.model";
-import { useState } from "react";
+
 import { normalizeBN } from "@/web3/decimal";
-import moment from "moment";
 import { calculateBNPercentile } from "@/web3/math";
+
+import TimeFilter from "../widgets/TimeFilter";
 
 Chart.register(
   LineElement,

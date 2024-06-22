@@ -3,7 +3,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
-import { TimeFrame } from "@/composables/useGraph";
+import { TimeFrame } from "@/composables/api/useGraph";
 
 type TimeFilterProps = {
   className?: string;
