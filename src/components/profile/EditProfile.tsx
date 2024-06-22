@@ -19,9 +19,10 @@ export default function EditProfile() {
   });
 
   const processForm = (values: Record<string, any>) => {
+    if (typeof values.avatar === "string") delete values["avatar"];
     return Api.instance.user
       .updateUser(user!.id, values)
-      .then(({ data }) => setUser(user));
+      .then(({ data }) => setUser(data));
   };
 
   return (
@@ -39,9 +40,9 @@ export default function EditProfile() {
             avatar: user?.avatar as unknown as File,
             name: user?.name,
           }}
-          onSubmit={(values, { setSubmitting }) => {
+          onSubmit={(values, { setSubmitting, setFieldValue }) => {
             toast
-              .promise(processForm(values), {
+              .promise(processForm({ ...values }), {
                 pending: "Updating profile",
                 error: "Failed to update profile",
                 success: "Updated profile successful",
@@ -49,27 +50,30 @@ export default function EditProfile() {
               .finally(() => setSubmitting(false));
           }}
         >
-          <Form className="flex flex-col space-y-8">
-            <div className="flex flex-col space-y-4">
-              <div className="flex flex-col">
-                <AvatarInput name="avatar" />
-                <small className="text-red">
-                  <ErrorMessage name="avatar" />
-                </small>
+          {({ isSubmitting }) => (
+            <Form className="flex flex-col space-y-8">
+              <div className="flex flex-col space-y-4">
+                <div className="flex flex-col">
+                  <AvatarInput name="avatar" />
+                  <small className="text-red">
+                    <ErrorMessage name="avatar" />
+                  </small>
+                </div>
+                <Input
+                  label="Profile name"
+                  placeholder="Full name"
+                  name="name"
+                />
               </div>
-              <Input
-                label="Profile name"
-                placeholder="Full name"
-                name="name"
-              />
-            </div>
-            <button
-              type="submit"
-              className="btn btn-primary"
-            >
-              Save Profile
-            </button>
-          </Form>
+              <button
+                disabled={isSubmitting}
+                type="submit"
+                className="btn btn-primary"
+              >
+                Save Profile
+              </button>
+            </Form>
+          )}
         </Formik>
       </PopoverPanel>
     </Popover>

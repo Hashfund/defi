@@ -12,6 +12,8 @@ export default function AvatarInput({ name }: AvatarProps) {
   const fileRef = useRef<HTMLInputElement | null>(null);
   const { values, setFieldValue } = useFormikContext<{ [key: string]: File }>();
 
+  const avatar = values[name];
+
   return (
     <div className="m-auto">
       <input
@@ -31,7 +33,11 @@ export default function AvatarInput({ name }: AvatarProps) {
         <div className="relative">
           {values[name] ? (
             <Image
-              src={URL.createObjectURL(values[name])}
+              src={
+                typeof avatar === "string"
+                  ? avatar
+                  : URL.createObjectURL(avatar)
+              }
               alt="Preview"
               width={32}
               height={32}
