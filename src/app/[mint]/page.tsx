@@ -1,3 +1,4 @@
+import { RouteProps } from "@/types";
 import {
   MintInfoGraph,
   Header,
@@ -6,11 +7,10 @@ import {
   HodlList,
   LiquidList,
 } from "@/components/mint-info";
-import useGraph from "@/composables/useGraph";
-import useLeaderboard from "@/composables/useLeaderboard";
-import useMint from "@/composables/useMint";
+import useMint from "@/composables/api/useMint";
+import useGraph from "@/composables/api/useGraph";
+import useLeaderboard from "@/composables/api/useLeaderboard";
 import BalanceProvider from "@/providers/BalanceProvider";
-import { RouteProps } from "@/types";
 
 export default async function MintInfoPage({
   params: { mint: qMint },

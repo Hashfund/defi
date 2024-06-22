@@ -8,7 +8,7 @@
 }
 
 .btn-primary {
-  @apply bg-gradient-to-r from-primary to-secondary
+  @apply bg-gradient-to-r from-primary to-secondary;
 }
 
 .btn-primary:hover,
@@ -38,12 +38,17 @@ table th {
   @apply text-sm;
 }
 
+th:not(:first-child),
+td:not(:first-child) {
+  @apply px-4;
+}
 th,
 td {
-  @apply p-4  whitespace-nowrap;
+  @apply py-2  whitespace-nowrap;
 }
 
-td, th {
+td,
+th {
   @apply border-b border-dark-200;
 }
 

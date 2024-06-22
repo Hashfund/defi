@@ -1,12 +1,15 @@
 "use client";
+import { clusterApiUrl } from "@solana/web3.js";
 import {
   ConnectionProvider,
   WalletProvider,
 } from "@solana/wallet-adapter-react";
+import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
+
 import { useWalletList } from "@/composables/useWalletList";
 import NavigationProvider from "./NavigationProvider";
-import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
-import { clusterApiUrl } from "@solana/web3.js";
+
+import AuthProvider from "./AuthProvider";
 
 export default function Provider({ children }: React.PropsWithChildren) {
   const wallets = useWalletList();
@@ -21,7 +24,9 @@ export default function Provider({ children }: React.PropsWithChildren) {
           wallets={wallets}
           autoConnect
         >
-          <WalletModalProvider>{children}</WalletModalProvider>
+          <WalletModalProvider>
+            <AuthProvider>{children}</AuthProvider>
+          </WalletModalProvider>
         </WalletProvider>
       </ConnectionProvider>
     </NavigationProvider>

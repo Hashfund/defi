@@ -1,6 +1,6 @@
 import LeaderboardItem from "@/components/LeaderboardItem";
 import TimeFilter from "@/components/widgets/TimeFilter";
-import useUserLeaderboard from "@/composables/useUserLeaderboard";
+import useUserLeaderboard from "@/composables/api/useUserLeaderboard";
 import { normalizeBN } from "@/web3/decimal";
 import { Explorer } from "@/web3/link";
 import Link from "next/link";

@@ -1,6 +1,10 @@
-import { Annoucement, RecentMint, RecentFreed, Token } from "@/components/home";
-import useMint from "@/composables/useMint";
-import { useMints } from "@/composables/useMints";
+import { useMints } from "@/composables/api/useMints";
+import {
+  Annoucement,
+  RecentMint,
+  RecentFreed,
+  Token,
+} from "@/components/home";
 
 export default async function HomePage() {
   const { mints: recent } = await useMints({ orderBy: "timestamp" });
@@ -8,7 +12,7 @@ export default async function HomePage() {
     orderBy: "timestamp",
     canTrade: false,
   });
-  const { next, mints } = await useMints({ orderBy: "volumeIn" });
+  const { mints } = await useMints({ orderBy: "volumeIn" });
 
   return (
     <main className="flex flex-col space-y-8">

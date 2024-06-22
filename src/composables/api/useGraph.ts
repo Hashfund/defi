@@ -1,6 +1,5 @@
 import moment from "moment";
 import Api from "@/lib/api";
-import { normalizeBN } from "@/web3/decimal";
 
 export const TimeFrame = {
   "24h": 1,
