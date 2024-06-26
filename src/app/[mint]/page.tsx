@@ -46,7 +46,7 @@ export default async function MintInfoPage({
 
         <div
           className="flex px-4"
-          lt-md="flex-col"
+          lt-md="flex-col space-y-4"
           md="space-x-4 px-8"
         >
           <HodlList

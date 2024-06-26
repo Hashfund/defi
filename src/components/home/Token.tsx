@@ -2,8 +2,7 @@ import clsx from "clsx";
 
 import { Mint } from "@/lib/api/models";
 import { TokenList } from "../TokenList";
-import { MdArrowDownward, MdArrowDropDown } from "react-icons/md";
-import TokenFilter from "../widgets/TokenFilter";
+import TokenSort from "../TokenSort";
 
 type TokenProps = {
   className?: string;
@@ -25,7 +24,7 @@ export function Token({ className, mints }: TokenProps) {
         </div>
         <div className="flex flex-col space-y-2">
           <small className="text-white/75">Filter By</small>
-          <TokenFilter />
+          <TokenSort />
         </div>
       </div>
       <TokenList

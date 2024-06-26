@@ -22,7 +22,7 @@ export default function Chart({ className, data, onClick }: ChartProps) {
   useEffect(() => {
     if (chartEl.current) {
       chart.current = createChart(chartEl.current, {
-        width: screen.width * 0.9,
+        width: screen.width * 0.8,
         layout: {
           background: { color: "#222" },
         },
@@ -54,7 +54,7 @@ export default function Chart({ className, data, onClick }: ChartProps) {
   return (
     <div
       ref={chartEl}
-      className={clsx(className)}
+      className={clsx(className, "mx-auto")}
     />
   );
 }

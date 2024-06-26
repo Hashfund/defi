@@ -4,6 +4,7 @@ import { Mint } from "@/lib/api/models";
 import ProgressBar from "../ProgressBar";
 import { normalizeBN } from "@/web3/decimal";
 import { calculateBNPercentage } from "@/web3/math";
+import SocialList from "./SocialList";
 
 type HeaderProps = {
   mint: Mint;
@@ -16,14 +17,21 @@ export function Header({ mint }: HeaderProps) {
       lt-md="flex-col space-y-2"
       md="space-x-4 px-8"
     >
-      <div>
-        <Image
-          src={mint.metadata.image}
-          alt={mint.metadata.name}
-          width={64}
-          height={64}
-          className="rounded"
-        />
+      <div
+        className="flex"
+        lt-md="items-center space-x-4"
+        md="flex-col space-y-4"
+      >
+        <div>
+          <Image
+            src={mint.metadata.image}
+            alt={mint.metadata.name}
+            width={64}
+            height={64}
+            className="rounded"
+          />
+        </div>
+        <SocialList className="md:hidden" />
       </div>
       <div className="flex flex-1 space-x-4">
         <div className="flex flex-1 items-center">
@@ -34,6 +42,7 @@ export function Header({ mint }: HeaderProps) {
                 {mint.metadata.description}
               </small>
             </div>
+            <SocialList className="lt-md:hidden" />
             <div
               className="flex text-sm font-light font-sans"
               lt-md="flex-col"

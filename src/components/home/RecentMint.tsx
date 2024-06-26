@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import Link from "next/link";
 import Image from "next/image";
-import { MdBolt } from "react-icons/md";
+import { MdBolt, MdChevronRight } from "react-icons/md";
 
 import type { Mint } from "@/lib/api/models";
 import { normalizeBN } from "@/web3/decimal";
@@ -45,12 +45,14 @@ export function RecentMint({ className, mints }: RecentMintProps) {
               />
               <p>{mint.name}</p>
             </div>
-            <div>
+            <div className="flex items-center space-x-2">
               {mint.boundingCurve && (
                 <p className="sol text-sm">
                   {normalizeBN(mint.boundingCurve?.initialPrice)}
                 </p>
               )}
+
+              <MdChevronRight className="text-xl" />
             </div>
           </Link>
         ))}

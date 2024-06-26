@@ -6,17 +6,17 @@ import { useSearchParams } from "next/navigation";
 import { MdArrowDropDown, MdCheck } from "react-icons/md";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 
-const filters = {
-  market_cap: "Market Cap",
-  max_marketcap: "Max Marketcap",
-  volume: "Volume",
+const sorts = {
+  marketCap: "Market Cap",
+  maxMarketCap: "Max Marketcap",
+  volumeIn: "Volume",
   price: "Price",
-  created_at: "Created At",
+  timestamp: "Created At",
 };
 
-export default function TokenFilter() {
+export default function TokenSort() {
   const searchParams = useSearchParams();
-  const tokenFilter = searchParams.get("token_filter") ?? "market_cap";
+  const sortBy = searchParams.get("token_sort_by") ?? "marketCap";
 
   return (
     <Menu
@@ -24,12 +24,16 @@ export default function TokenFilter() {
       className="relative"
     >
       <MenuButton className="w-40 flex border border-dark rounded p-2 text-white/75">
-        <span className="flex-1 text-left">{filters[tokenFilter as unknown as keyof typeof filters]}</span>
+        <span className="flex-1 text-left">
+          {sorts[sortBy as unknown as keyof typeof sorts]}
+        </span>
         <MdArrowDropDown className="text-xl" />
       </MenuButton>
       <MenuItems className="absolute right-0 min-w-48 flex flex-col rounded bg-dark-500/50 backdrop-blur-sm divide-y divide-dark-100">
-        {Object.entries(filters).map(([key, value]) => {
-          const isActive = tokenFilter === key;
+        {Object.entries(sorts).map(([key, value]) => {
+          const isActive = sortBy === key;
+          const q = new URLSearchParams(searchParams);
+          q.set("token_sort_by", key);
 
           return (
             <MenuItem
@@ -38,7 +42,7 @@ export default function TokenFilter() {
               className={clsx("flex space-x-2 text-left px-4 py-2", {
                 "text-primary": isActive,
               })}
-              href={`?token_filter=${key}`}
+              href={`?${q.toString()}`}
             >
               {isActive && <MdCheck className="text-xl" />}
               <span> {value}</span>
