@@ -6,7 +6,7 @@ import { Graph } from "./models/graph.model";
 export class SwapApi extends Api {
   path = "swaps";
 
-  getSwaps(query: Record<string, string>) {
+  getSwaps(query?: Record<string, string>) {
     return this.axios.get<LimitOffsetPagination<Swap>>(
       this.buildQueryPath(this.path, query)
     );

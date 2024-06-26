@@ -1,4 +1,4 @@
-import { User } from "@/lib/api/models/user.mode";
+import { User } from "@/lib/api/models/user.model";
 import { truncateAddress } from "@/web3/address";
 import clsx from "clsx";
 import { MdAccountCircle } from "react-icons/md";

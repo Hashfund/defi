@@ -1,3 +1,5 @@
+import { User } from "./user.model";
+
 export type Swap = {
   id: number;
   mint: string;
@@ -6,7 +8,7 @@ export type Swap = {
   tradeDirection: 0 | 1;
   marketCap: number;
   timestamp: string;
-  payer: string;
+  payer: User;
   signature: string;
 };
 

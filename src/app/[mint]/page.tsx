@@ -11,6 +11,8 @@ import useMint from "@/composables/api/useMint";
 import useGraph from "@/composables/api/useGraph";
 import useLeaderboard from "@/composables/api/useLeaderboard";
 import BalanceProvider from "@/providers/BalanceProvider";
+import useSwaps from "@/composables/api/useSwaps";
+import { TradeList } from "@/components/TradeList";
 
 export default async function MintInfoPage({
   params: { mint: qMint },
@@ -18,6 +20,7 @@ export default async function MintInfoPage({
 }: RouteProps) {
   const mint = await useMint(qMint);
   const graph = await useGraph(qMint, timeFrame);
+  const { results: swaps } = await useSwaps({ mint: qMint });
   const hodlers = await useLeaderboard(qMint, "volumeIn");
   const liquidators = await useLeaderboard(qMint, "volumeOut");
 
@@ -29,6 +32,16 @@ export default async function MintInfoPage({
           mint={mint}
           graph={graph}
         />
+        <div className="max-h-xs flex flex-col overflow-y-scroll space-y-4">
+          <div className="px-4 md:px-8">
+            <h1 className="text-2xl font-medium">Trades</h1>
+          </div>
+          <TradeList
+            mint={mint}
+            swaps={swaps}
+            className="px-4 md:px-8"
+          />
+        </div>
         <MyInfo mint={mint} />
 
         <div

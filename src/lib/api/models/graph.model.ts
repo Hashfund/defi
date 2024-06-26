@@ -1,6 +1,7 @@
 export type Graph = {
-  date: string | number;
-  volumeIn: string;
-  volumeOut: string;
+  date: string;
+  amountIn: string;
+  amountOut: string;
   marketCap: string;
+  tradeDirection: number;
 };

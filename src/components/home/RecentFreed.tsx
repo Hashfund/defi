@@ -23,7 +23,7 @@ export function RecentFreed({ className, mints }: RecentFreedProps) {
       <div className="flex items-center border-b-1 border-dark px-4 py-4 space-x-4">
         <div className="flex flex-1 items-center space-x-2">
           <FaHashtag className="text-2xl" />
-          <p className="text-base font-medium">Recently Freed</p>
+          <p className="text-base font-medium">Recently Hashed</p>
         </div>
       </div>
       {mints.length > 0 ? (

@@ -3,9 +3,11 @@
 import Image from "next/image";
 import { MdSquare, MdDiamond } from "react-icons/md";
 
-import { User } from "@/lib/api/models/user.mode";
-import EditProfile from "./EditProfile";
 import useAuth from "@/composables/useAuth";
+import { avatarOrDefault } from "@/web3/asset";
+import { User } from "@/lib/api/models/user.model";
+
+import EditProfile from "./EditProfile";
 
 type ProfileHeaderProps = {
   user: User;
@@ -24,7 +26,7 @@ export function ProfileHeader({ user, mints, tokens }: ProfileHeaderProps) {
     >
       <div>
         <Image
-          src={isMe ? me.avatar : user.avatar}
+          src={avatarOrDefault(isMe ? me.avatar : user.avatar)}
           width={128}
           height={128}
           alt={user.name}

@@ -26,6 +26,10 @@ export type Mint = {
         }
       ]
     ];
+    socials: {
+      telegram?: string,
+      twitter?: string,
+    }
   };
   marketCap: string,
   totalSupply: string;
@@ -34,5 +38,5 @@ export type Mint = {
   volumeOut: string;
   volumeInFrom: string,
   volumeOutFrom: string;
-  signature: string
+  signature: string,
 };

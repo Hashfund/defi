@@ -32,7 +32,8 @@ export function Navigation({ className }: NavigationProps) {
         />
       </Link>
       <ol
-        className="flex flex-1 items-center"
+        className="flex flex-1"
+        lt-md="items-center"
         md="flex-col space-y-4"
       >
         {layoutNavigations.map((navigation) => {
@@ -43,24 +44,25 @@ export function Navigation({ className }: NavigationProps) {
               key={navigation.name}
               href={navigation.href}
               className={clsx(
-                "p-2 cursor-pointer hover:text-primary",
+                "flex p-2 cursor-pointer hover:text-primary",
                 isActive ? "text-primary" : "text-white/75"
               )}
               lt-md="flex-1 flex flex-col items-center justify-center"
-              md="bg-dark-300 rounded-full"
+              md="space-x-2"
             >
               <navigation.icon className="text-2xl md:text-xl" />
-              <small md="hidden">{navigation.name}</small>
+              <p>{navigation.name}</p>
             </Link>
           );
         })}
       </ol>
       <ol
-        className="flex flex-col items-center"
+        className="flex flex-col"
         lt-md="hidden"
       >
-        <li className="cursor-pointer p-2 text-white/75">
+        <li className="flex cursor-pointer p-2 text-white/75 space-x-2">
           <FaQuestionCircle className="text-2xl" />
+          <p>Support</p>
         </li>
       </ol>
     </nav>

@@ -2,7 +2,7 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { createContext, useEffect, useState } from "react";
 
 import Api from "@/lib/api";
-import { User } from "@/lib/api/models/user.mode";
+import { User } from "@/lib/api/models/user.model";
 
 type AuthContext = {
   user: User | null;

@@ -1,6 +1,6 @@
 import { Api } from "./impl";
 import { LimitOffsetPagination, Mint } from "./models";
-import { Leaderboard, User } from "./models/user.mode";
+import { Leaderboard, User } from "./models/user.model";
 
 export class userApi extends Api {
   path = "users";

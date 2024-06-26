@@ -1,7 +1,7 @@
 import { Api } from "./impl";
 import { LimitOffsetPagination, Mint } from "./models";
 import { Graph } from "./models/graph.model";
-import { Leaderboard } from "./models/user.mode";
+import { Leaderboard } from "./models/user.model";
 
 export class MintApi extends Api {
   path = "mints";

@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import LeaderboardItem from "../LeaderboardItem";
-import { Leaderboard } from "@/lib/api/models/user.mode";
+import { Leaderboard } from "@/lib/api/models/user.model";
 import { normalizeBN } from "@/web3/decimal";
 
 type HodlListProps = {
